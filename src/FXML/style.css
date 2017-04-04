@@ -1,0 +1,15 @@
+.textFill{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0.5,0.5) , 0,0,0,1 );
+
+}
+
+.button {
+    -fx-text-fill: #3D3C3B;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#FFF9F8, #B0ACAB);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 10, 0.0 , 0 , 1 );
+}

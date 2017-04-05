@@ -6,14 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.jnetpcap.Pcap;
 
 import app.*;
 import org.jnetpcap.packet.JPacket;
@@ -73,33 +69,25 @@ public class Controller {
     public void load(){
         FileChooser fileChooser = new FileChooser();
         file = fileChooser.showOpenDialog(null);
-        fileName = file.getAbsolutePath();
 
         ipAddresses atm = new ipAddresses();
-        Set<String> temp = atm.add(file);
+        atm.load(file);
+        Set<String> temp = atm.getIPAdderres();
 
-        StringBuilder build = new StringBuilder();
-        build.append("IP Addreeses in Pcap File\n");
-        for (String line:temp){
-            build.append(line+"\n");
-
-        }
-        String lineew = build.toString();
-        ObservableList<String> items = FXCollections.observableArrayList(lineew);
+        ObservableList<String> items = FXCollections.observableArrayList(temp);
         list.setItems(items);
-        System.out.println(lineew);
 
     }
 
     public void test(){
         // below is a test method
-        // wanted to return pcap objects from TCP
-        /*
+        // wanted to return pcap objects from Packets
+
         File file = new File("test.pcap");
-        TCP tcp = new TCP(file);
+        Packets tcp = new Packets();
 
-
-        ArrayList<JPacket> j = tcp.getJackets();
+        tcp.load(file);
+        ArrayList<JPacket> j = tcp.getPackets();
 
         for(JPacket x :j){
             Tcp tap = new Tcp();
@@ -107,8 +95,7 @@ public class Controller {
                 //System.out.println(x.toString());
             }
         }
-        */
-    }
 
+    }
 
 }

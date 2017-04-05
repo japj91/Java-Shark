@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class model {
-    TCP tcp;
+    Packets tcp;
     Pcap pcap;
     File fileM;
     ArrayList<String> list;

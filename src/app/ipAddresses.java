@@ -1,42 +1,39 @@
 package app;
+
+
 import java.io.File;
 import java.util.*;
 
-import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.JPacket;
-import org.jnetpcap.packet.JPacketHandler;
 import org.jnetpcap.protocol.network.Ip4;
 
-public class ipAddresses {
-    public Set add(File fIle){
+public class ipAddresses extends Packets {
 
-        final StringBuilder errbuf = new StringBuilder();
-        System.out.println(fIle.getName());
-        System.out.println(fIle.getAbsolutePath());
-        final Pcap pcap = Pcap.openOffline(fIle.getAbsolutePath(), errbuf);
+    public ipAddresses(){
 
-        HashSet<String> SourceIP = new HashSet<>();
-        HashSet<String> DestIP = new HashSet<>();
-        pcap.loop(-1, new JPacketHandler<StringBuilder>() {
-
-            Ip4 ip = new Ip4();
-            byte[] myListSource = new byte[10];
-            byte[] myListDest = new byte[10];
-
-            @Override
-            public void nextPacket(JPacket jPacket, StringBuilder stringBuilder) {
-                if (jPacket.hasHeader(ip)){
-                    myListSource = ip.source();
-                    myListDest  = ip.destination();
-                    String sourceIPString = org.jnetpcap.packet.format.FormatUtils.ip(myListSource);
-                    String DestIpString = org.jnetpcap.packet.format.FormatUtils.ip(myListDest);
-
-                    SourceIP.add(sourceIPString);
-                    DestIP.add(DestIpString);
-                }
-            }
-        }, errbuf);
-        System.out.println(DestIP);
-        return SourceIP;
     }
+
+    public Set<String> getIPAdderres(){
+        // method gets a set of all packets from parent class manipulates them to get data
+        HashSet<String> IPadderes = new HashSet<>();
+        ArrayList<JPacket> packets = getPackets();
+
+        for (JPacket pack: packets){
+            Ip4 ip4 = new Ip4();
+
+            if(pack.hasHeader(ip4)){
+                byte[] myListSource = new byte[4];
+                myListSource = ip4.source();
+                String IPString = org.jnetpcap.packet.format.FormatUtils.ip(myListSource);
+                IPadderes.add(IPString);
+
+            }
+
+        }
+        return IPadderes;
+    }
+
+
+
+
 }

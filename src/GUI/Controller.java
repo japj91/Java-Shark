@@ -16,8 +16,11 @@ import javafx.stage.Stage;
 import org.jnetpcap.Pcap;
 
 import app.*;
+import org.jnetpcap.packet.JPacket;
+import org.jnetpcap.protocol.tcpip.Tcp;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class Controller {
@@ -47,7 +50,6 @@ public class Controller {
 
         textArea.setText(fileName);
         final StringBuilder errbuf = new StringBuilder();
-        Pcap pcap  = Pcap.openOffline(fileName, errbuf);
     }
 
     public void runDiagnostic(){
@@ -65,6 +67,7 @@ public class Controller {
         }catch (Exception e){
             System.out.println("cannot find new MainWindow");
         }
+        test();
     }
 
     public void load(){
@@ -76,7 +79,7 @@ public class Controller {
         Set<String> temp = atm.add(file);
 
         StringBuilder build = new StringBuilder();
-        build.append("IP Addreeses in Pcap File\n  ");
+        build.append("IP Addreeses in Pcap File\n");
         for (String line:temp){
             build.append(line+"\n");
 
@@ -88,7 +91,24 @@ public class Controller {
 
     }
 
-    public model getModel(){
-        return model;
+    public void test(){
+        // below is a test method
+        // wanted to return pcap objects from TCP
+        /*
+        File file = new File("test.pcap");
+        TCP tcp = new TCP(file);
+
+
+        ArrayList<JPacket> j = tcp.getJackets();
+
+        for(JPacket x :j){
+            Tcp tap = new Tcp();
+            if(x.hasHeader(tap)){
+                //System.out.println(x.toString());
+            }
+        }
+        */
     }
+
+
 }

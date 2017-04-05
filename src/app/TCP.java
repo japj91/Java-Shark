@@ -3,26 +3,36 @@ package app;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.*;
 import org.jnetpcap.protocol.tcpip.Tcp;
+
+import java.io.File;
 import java.util.ArrayList;
-
+// made it so when you initailize class you need to send a file
+// created a getter for a array list that contians all packets
 public class TCP {
+    private ArrayList<JPacket> JPackets;
 
-    public ArrayList play(Pcap pcap){
-
-        ArrayList<String> list = new ArrayList<String>();
+    public  TCP(File file){
+        // play creates a list of all pcap packets
+        // every method can access list of all pcap to different operations
+        // changed this method so its takes a file instead of a pcap object
+        JPackets = new ArrayList<>();
         final StringBuilder errbuf = new StringBuilder();
+        Pcap pcap = Pcap.openOffline(file.getAbsolutePath(),errbuf);
+
         pcap.loop(-1, new JPacketHandler<StringBuilder>() {
 
             final Tcp tcp = new Tcp();
             public void nextPacket(JPacket packet, StringBuilder stringBuilder) {
-
-                if(packet.hasHeader(tcp)){
-                    String dest = String.valueOf(tcp.destination());
-                    list.add(dest);
-                }
+                JPackets.add(packet);
             }
         }, errbuf);
-        return list;
+
+
     }
+
+    public ArrayList getJackets(){
+        return JPackets;
+    }
+
 }
 

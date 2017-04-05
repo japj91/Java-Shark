@@ -13,7 +13,7 @@ public class model {
 
 
     public model() {
-        tcp = new TCP();
+
     }
 
     public void TcpSetup(File file) {

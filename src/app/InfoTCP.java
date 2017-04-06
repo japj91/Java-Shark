@@ -4,14 +4,14 @@ import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
-import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by jap on 4/5/2017.
+ * General TCP class
+ * info on TCP packets
  */
 public class InfoTCP  extends  Packets{
     ArrayList<JPacket> jPackets;
@@ -50,4 +50,6 @@ public class InfoTCP  extends  Packets{
         }
         return hosts;
     }
+
+
 }

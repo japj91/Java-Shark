@@ -165,6 +165,7 @@ public class Controller {
         longest.setText(gen.largestPacket());
         shortest.setText(gen.shortestPacket());
         time.setText(gen.timeForCapture()+" secs");
+        gen.networkTraffic();
 
     }
 

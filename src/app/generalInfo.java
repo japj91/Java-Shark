@@ -55,4 +55,14 @@ public class generalInfo  extends Packets{
         return timeDiff;
 
     }
+
+    public void networkTraffic(){
+        // method tells u how many bytes are in the file
+        int x =0;
+        for(JPacket Packet:jPackets){
+
+            x+=Packet.size();
+        }
+        System.out.println(x+" amount of bytes in the file being transfered");
+    }
 }

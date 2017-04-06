@@ -51,6 +51,9 @@ public class Controller {
     @FXML
     TextField sourceHost;
 
+    @FXML
+    String sourceIP;
+
 
 
 
@@ -74,7 +77,14 @@ public class Controller {
         ipLoad(file);
         genInfo(file);
         TCP(file);
+        networkAnalysis(file);
 
+    }
+
+    private void networkAnalysis(File file) {
+        netAnalysis net = new netAnalysis();
+        net.load(file);
+        net.mapping();
     }
 
     private void TCP(File file) {
@@ -149,9 +159,12 @@ public class Controller {
     }
 
     public void ipLoad(File file){
+
         ipAddresses ipAddresses = new ipAddresses();
         ipAddresses.load(file);
         Set<String> set = ipAddresses.getIPAdderres();
+
+        sourceIP = String.valueOf(set);
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
     }
@@ -160,9 +173,11 @@ public class Controller {
         generalInfo gen = new generalInfo();
         gen.load(file);
         packetTotal.setText(gen.numPackets());
+
         longest.setText(gen.largestPacket());
         shortest.setText(gen.shortestPacket());
         time.setText(gen.timeForCapture()+" secs");
+
         gen.networkTraffic();
 
     }

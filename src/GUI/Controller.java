@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -15,8 +17,11 @@ import app.*;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 public class Controller {
@@ -24,12 +29,35 @@ public class Controller {
     @FXML
     Label textArea;
 
-    public javafx.scene.control.ListView<String> list = new javafx.scene.control.ListView<>();
+    @FXML
+    ListView<String> list;
 
-    public ProgressBar bar;
+    @FXML
+    TextArea FileName;
+
+    @FXML
+    Button OpenFileChooser;
+
+    @FXML
+    TextField packetTotal;
+
+    @FXML
+    TextField time;
+
+    @FXML
+    TextField shortest;
+
+    @FXML
+    TextField longest;
+
+    @FXML
+    TextField sourceHost;
+
+
+
 
     model model;
-    public File file;
+
     String fileName;
 
 
@@ -37,8 +65,32 @@ public class Controller {
         model = new model();
     }
 
-    public void findFile(){
+    public void MainWindowLoader(){
+        // when open file is chossen comes here
+        // users selects file and then the popup is filled up
+        // Can implement second window but windows arent able to communicate
+        // error shows up but to show bassically make the open button launch openFilechooser then on second GUI make file button
+        // launch MainWindowLoader
 
+        File file = load();
+        ipLoad(file);
+        genInfo(file);
+        TCP(file);
+
+    }
+
+    private void TCP(File file) {
+        InfoTCP tcp = new InfoTCP();
+        tcp.load(file);
+        String ipAdderes = "";
+        for(String x: tcp.getOriginHost()){  // for loop is here in case person is capturing traffic from their router.
+            ipAdderes += x+"\n ";
+        }
+        sourceHost.setText(ipAdderes);
+    }
+
+    public void findFile(){
+        // probally dead code
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
         fileName = file.getAbsolutePath();
@@ -48,11 +100,11 @@ public class Controller {
         final StringBuilder errbuf = new StringBuilder();
     }
 
-    public void runDiagnostic(){
+    public void openFileChooser(){
 
 
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/FileChooser.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("JM Networks");
@@ -66,17 +118,14 @@ public class Controller {
         test();
     }
 
-    public void load(){
+    public File load(){
         FileChooser fileChooser = new FileChooser();
-        file = fileChooser.showOpenDialog(null);
-
-        ipAddresses atm = new ipAddresses();
-        atm.load(file);
-        Set<String> temp = atm.getIPAdderres();
-
-        ObservableList<String> items = FXCollections.observableArrayList(temp);
-        list.setItems(items);
-
+        File file = fileChooser.showOpenDialog(null);
+        if(file==null){
+            System.out.println("No File Choosen");
+            System.exit(1);
+        }
+        return file;
     }
 
     public void test(){
@@ -89,12 +138,33 @@ public class Controller {
         tcp.load(file);
         ArrayList<JPacket> j = tcp.getPackets();
 
+        int xa = 0;
+
         for(JPacket x :j){
             Tcp tap = new Tcp();
-            if(x.hasHeader(tap)){
-                //System.out.println(x.toString());
-            }
+            System.out.println(x.toString());
         }
+
+
+
+
+    }
+
+    public void ipLoad(File file){
+        ipAddresses ipAddresses = new ipAddresses();
+        ipAddresses.load(file);
+        Set<String> set = ipAddresses.getIPAdderres();
+        ObservableList<String> items = FXCollections.observableArrayList(set);
+        list.setItems(items);
+    }
+
+    public void genInfo(File file ){
+        generalInfo gen = new generalInfo();
+        gen.load(file);
+        packetTotal.setText(gen.numPackets());
+        longest.setText(gen.largestPacket());
+        shortest.setText(gen.shortestPacket());
+        time.setText(gen.timeForCapture()+" secs");
 
     }
 

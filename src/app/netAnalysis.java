@@ -40,4 +40,38 @@ public class netAnalysis  extends Packets{
         }
         System.out.println(packetMap);
     }
+
+    public void packetSize(){
+        HashMap<String,Integer> packetMap = new HashMap<>();
+        Ip4 ip = new Ip4();
+        byte[] stanList;
+        byte[] stanList2;
+
+        for(JPacket packet: jPackets){
+
+            if (packet.hasHeader(ip)){
+                stanList = ip.destination();
+                stanList2 = ip.source();
+                String IPString = org.jnetpcap.packet.format.FormatUtils.ip(stanList);
+               // String IPString2 = org.jnetpcap.packet.format.FormatUtils.ip(stanList2);
+
+                if(!packetMap.containsKey(IPString)){
+                    packetMap.put(IPString,packet.size());
+                }
+                else {
+                    int temp = packetMap.get(IPString);
+                    temp += packet.size();
+                    packetMap.put(IPString,temp);
+                }
+//                if (!packetMap.containsKey(IPString2)){
+//                    packetMap.put(IPString2,packet.size());
+//                }else{
+//                    int temp = packetMap.get(IPString2);
+//                    temp += packet.size();
+//                    packetMap.put(IPString2,temp);
+//                }
+            }
+        }
+        System.out.println(packetMap);
+    }
 }

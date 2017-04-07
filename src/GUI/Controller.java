@@ -31,6 +31,9 @@ public class Controller {
     ListView<String> list;
 
     @FXML
+    ListView<String> openList;
+
+    @FXML
     TextArea FileName;
 
     @FXML
@@ -54,9 +57,6 @@ public class Controller {
     @FXML
     String sourceIP;
 
-
-
-
     model model;
 
     String fileName;
@@ -74,10 +74,12 @@ public class Controller {
         // launch MainWindowLoader
 
         File file = load();
+
         ipLoad(file);
         genInfo(file);
         TCP(file);
         networkAnalysis(file);
+
 
     }
 
@@ -85,6 +87,7 @@ public class Controller {
         netAnalysis net = new netAnalysis();
         net.load(file);
         net.mapping();
+        net.packetSize();
     }
 
     private void TCP(File file) {
@@ -113,17 +116,16 @@ public class Controller {
 
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/FileChooser.fxml"));
+
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("JM Networks");
             stage.setScene(new Scene(root1));
             stage.show();
 
-
         }catch (Exception e){
             System.out.println("cannot find new MainWindow");
         }
-        test();
     }
 
     public File load(){
@@ -157,6 +159,7 @@ public class Controller {
 
 
     }
+
 
     public void ipLoad(File file){
 

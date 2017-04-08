@@ -4,14 +4,8 @@ import app.ShareableData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
+import javafx.scene.chart.*;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import sun.reflect.generics.tree.Tree;
 
 import java.net.URL;
 import java.util.*;
@@ -27,7 +21,10 @@ public class networkAnalysisController implements Initializable {
     private Parent root;
 
     @FXML
-    BarChart<String,Integer> chart;
+    BarChart<String,Integer> byteChart;
+
+    @FXML
+    BarChart<String,Integer> packetChart;
 
     @FXML
     CategoryAxis x;
@@ -38,6 +35,9 @@ public class networkAnalysisController implements Initializable {
     @FXML
     Label packetCount;
 
+    @FXML
+    Label byteCount;
+
 
     public void closer(){
         System.out.println("Close not yet implemented");
@@ -46,29 +46,10 @@ public class networkAnalysisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // putting the graph togethere
-        // have to get the source host
-        // create a map that has the num of packets as the key b/c u only want to show top 5
 
-        HashMap<String,Integer> map = ShareableData.getInstance().getHashMap();
-        map.remove(ShareableData.getInstance().getList().get(0)); // removing the host user from graph the admin doesnt need to see how often they are the source
+        setChart(ShareableData.getInstance().getBytesPerIP(), byteCount, byteChart);
+        setChart(ShareableData.getInstance().getPacketsPerIp(), packetCount, packetChart);
 
-        TreeMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
-        XYChart.Series series = new XYChart.Series<>();
-
-        Set<Integer> keySet = orderedMap.keySet();
-        System.out.println(orderedMap);
-        Iterator<Integer> itr = keySet.iterator();
-        int x =0;
-
-        while (itr.hasNext() && x!=5){
-            int key = itr.next();
-            String value = orderedMap.get(key);
-            series.getData().add(new XYChart.Data(value,key));
-            x++;
-            packetCount.setText(value);
-        }
-        chart.getData().addAll(series);
     }
 
     private TreeMap<Integer, String> createOrderedSet(HashMap<String,Integer> map){
@@ -80,4 +61,32 @@ public class networkAnalysisController implements Initializable {
        }
        return tempMap;
     }
+
+    private void setChart(HashMap<String,Integer> map, Label label, BarChart chart){
+        // putting the graph togethere
+        // have to get the source host
+        // create a map that has the num of packets as the key b/c u only want to show top 5
+        map.remove(ShareableData.getInstance().getList().get(0)); // removing the host user from graph the admin doesnt need to see how often they are the source
+
+        TreeMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
+        XYChart.Series series = new XYChart.Series<>();
+
+        Set<Integer> keySet = orderedMap.descendingKeySet();
+        Iterator<Integer> itr = keySet.iterator();
+        int x =0;
+
+        while (itr.hasNext() && x!=5){
+            int key = itr.next();
+            String value = orderedMap.get(key);
+            series.getData().add(new XYChart.Data(value,key));
+            if(x==0){
+                label.setText(value);
+            }
+            x++;
+
+        }
+        chart.getData().addAll(series);
+    }
+
+
 }

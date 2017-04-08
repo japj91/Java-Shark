@@ -23,10 +23,16 @@ public class ShareableData {
             return hostUser;
         }
 
-        private HashMap<String,Integer> mapOfPackets = new HashMap<>(); // this map gets set in geninfo packets method
+        private HashMap<String,Integer> bytesPerIP = new HashMap<>(); // this map gets set in geninfo packets method
 
-        public HashMap<String,Integer> getHashMap(){
-            return mapOfPackets;
+        public HashMap<String,Integer> getBytesPerIP(){
+            return bytesPerIP;
+        }
+
+        private HashMap<String,Integer> packetsPerIp = new HashMap<>();
+
+        public HashMap<String,Integer> getPacketsPerIp(){
+            return packetsPerIp;
         }
 
     }

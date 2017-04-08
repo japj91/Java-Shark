@@ -3,7 +3,6 @@ package app;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.network.Ip4;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,7 +26,7 @@ public class netAnalysis  extends Packets{
         for(JPacket packet: jPackets){
 
             if (packet.hasHeader(ip)){
-                list = ip.source();
+                list = ip.destination();
                 String IPString = org.jnetpcap.packet.format.FormatUtils.ip(list);
 
                 if(!packetMap.containsKey(IPString)){
@@ -40,6 +39,8 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
+        HashMap<String,Integer> map = ShareableData.getInstance().getPacketsPerIp();
+        map.putAll(packetMap);
         System.out.println(packetMap);
 
     }
@@ -67,7 +68,7 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
-        HashMap<String,Integer> map = ShareableData.getInstance().getHashMap();
+        HashMap<String,Integer> map = ShareableData.getInstance().getBytesPerIP();
         map.putAll(packetMap);
         System.out.println(packetMap);
     }

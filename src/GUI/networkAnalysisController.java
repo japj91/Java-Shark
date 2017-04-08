@@ -53,10 +53,11 @@ public class networkAnalysisController implements Initializable {
         HashMap<String,Integer> map = ShareableData.getInstance().getHashMap();
         map.remove(ShareableData.getInstance().getList().get(0)); // removing the host user from graph the admin doesnt need to see how often they are the source
 
-        HashMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
+        TreeMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
         XYChart.Series series = new XYChart.Series<>();
 
         Set<Integer> keySet = orderedMap.keySet();
+        System.out.println(orderedMap);
         Iterator<Integer> itr = keySet.iterator();
         int x =0;
 
@@ -70,9 +71,9 @@ public class networkAnalysisController implements Initializable {
         chart.getData().addAll(series);
     }
 
-    private HashMap<Integer, String> createOrderedSet(HashMap<String,Integer> map){
+    private TreeMap<Integer, String> createOrderedSet(HashMap<String,Integer> map){
        Set<String> keys = map.keySet();
-       HashMap<Integer,String> tempMap= new HashMap<>();
+       TreeMap<Integer,String> tempMap= new TreeMap<>();
 
        for(String temp:keys){
            tempMap.put(map.get(temp),temp);

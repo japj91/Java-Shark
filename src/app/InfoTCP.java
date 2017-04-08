@@ -29,9 +29,11 @@ public class InfoTCP  extends  Packets{
             if (packet.hasHeader(tcp)){
                 if (tcp.flags_SYN() && !tcp.flags_ACK()){
                    packTempList.add(packet);
+
                 }
             }
         }
+
         return packTempList;
     }
 

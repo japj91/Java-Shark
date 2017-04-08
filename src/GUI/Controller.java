@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import app.*;
@@ -20,6 +21,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -61,7 +63,6 @@ public class Controller {
 
     String fileName;
 
-
     public Controller(){
         model = new model();
     }
@@ -93,10 +94,13 @@ public class Controller {
     private void TCP(File file) {
         InfoTCP tcp = new InfoTCP();
         tcp.load(file);
-        String ipAdderes = "";
+        String ipAdderes ="";
         for(String x: tcp.getOriginHost()){  // for loop is here in case person is capturing traffic from their router.
             ipAdderes += x+"\n ";
         }
+        ArrayList<String> user = ShareableData.getInstance().getList();
+        user.add(ipAdderes.trim());
+        System.out.println(user);
         sourceHost.setText(ipAdderes);
     }
 
@@ -111,20 +115,20 @@ public class Controller {
         final StringBuilder errbuf = new StringBuilder();
     }
 
-    public void openFileChooser(){
-
+    public void openNetworkAnalysis(){
 
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/FileChooser.fxml"));
-
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/NetworkAnalysis.fxml"));
             Parent root1 = fxmlLoader.load();
+
             Stage stage = new Stage();
             stage.setTitle("JM Networks");
             stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
         }catch (Exception e){
-            System.out.println("cannot find new MainWindow");
+            System.out.println(e.getCause());
         }
     }
 
@@ -135,6 +139,7 @@ public class Controller {
             System.out.println("No File Choosen");
             System.exit(1);
         }
+
         return file;
     }
 
@@ -159,7 +164,6 @@ public class Controller {
 
 
     }
-
 
     public void ipLoad(File file){
 

@@ -77,7 +77,7 @@
                </GridPane.margin></Label>
             <Label styleClass="textFill" stylesheets="@style.css" text="Longest" translateY="-10.0" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <Button fx:id="ddos" mnemonicParsing="false" prefHeight="80.0" prefWidth="174.0" stylesheets="@style.css" text="DDos" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Button id="ntButton" mnemonicParsing="false" prefHeight="79.0" prefWidth="183.0" stylesheets="@style.css" text="Network Traffic" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="ntButton" mnemonicParsing="false" onAction="#openNetworkAnalysis" prefHeight="79.0" prefWidth="183.0" stylesheets="@style.css" text="Network Traffic" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <TextField fx:id="packetTotal" maxWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets />

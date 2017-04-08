@@ -1,5 +1,6 @@
 package app;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,6 +34,12 @@ public class ShareableData {
 
         public HashMap<String,Integer> getPacketsPerIp(){
             return packetsPerIp;
+        }
+
+        private ArrayList<File> fileList = new ArrayList<>();
+
+        public ArrayList<File> getFile(){
+            return fileList;
         }
 
     }

@@ -22,7 +22,6 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -41,6 +40,7 @@ public class Controller {
 
     @FXML
     TextArea FileName;
+
 
     @FXML
     Button OpenFileChooser;
@@ -63,13 +63,11 @@ public class Controller {
     @FXML
     String sourceIP;
 
-    model model;
+
 
     String fileName;
 
-    public Controller(){
-        model = new model();
-    }
+    public Controller(){}
 
     public void MainWindowLoader(){
         // when open file is chossen comes here
@@ -80,12 +78,23 @@ public class Controller {
 
         File file = load();
 
+        ArrayList<File> tempFile = ShareableData.getInstance().getFile();
+        tempFile.add(file);
+
         ipLoad(file);
         genInfo(file);
         TCP(file);
         networkAnalysis(file);
+        Http(file);
 
+    }
 
+    private void Http(File file) {
+        infoHttp http = new infoHttp();
+        http.load(file);
+        System.out.println();
+        System.out.println(http.packets(0));
+        System.out.println(http.packets(1));
     }
 
     private void networkAnalysis(File file) {
@@ -133,6 +142,23 @@ public class Controller {
 
         }catch (Exception e){
             System.out.println(e.getCause());
+        }
+    }
+
+    public void openURL(){
+
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/URL.fxml"));
+            Parent root1 = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("JM Networks");
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -196,6 +222,7 @@ public class Controller {
     public void setColor(){
         sourceHostLabel.setTextFill(Color.web("#0076a3"));
     }
+
     public void normalColor(){
         sourceHostLabel.setTextFill(Color.web("#000"));
         System.out.println("ajp");

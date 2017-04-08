@@ -9,9 +9,7 @@ import org.jnetpcap.protocol.network.Ip4;
 
 public class ipAddresses extends Packets {
 
-    public ipAddresses(){
-
-    }
+    public ipAddresses(){}
 
     public Set<String> getIPAdderres(){
         // method gets a set of all packets from parent class manipulates them to get data

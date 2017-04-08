@@ -21,7 +21,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
  * file used in this example can be found under the "tests" directory located
  * under the root installation directory of the source package. The tests
  * directory is not normally provided with binary distribution of jnetpcap. The
- * test file contains 483 packets most of which are http or tcp segments.
+ * test file contains 483 packets most of which are infoHttp or tcp segments.
  *
  * @author Mark Bednarczyk
  * @author Sly Technologies, Inc.
@@ -72,7 +72,7 @@ public class DecodeUsingJNetPcap {
             final Tcp tcp = new Tcp();
 
             /*
-             * Same thing for our http header
+             * Same thing for our infoHttp header
              */
             final Http http = new Http();
 
@@ -128,18 +128,18 @@ public class DecodeUsingJNetPcap {
 				/*
 				 * A typical and common approach to getting headers from a packet is to
 				 * chain them as a condition for the if statement. If we need to work
-				 * with both tcp and http headers, for example, we place both of them on
+				 * with both tcp and infoHttp headers, for example, we place both of them on
 				 * the command line.
 				 */
                 if (packet.hasHeader(tcp) && packet.hasHeader(http)) {
 					/*
-					 * Now we are guarranteed to have both tcp and http header peered. If
-					 * the packet only contained tcp segment even though tcp may have http
+					 * Now we are guarranteed to have both tcp and infoHttp header peered. If
+					 * the packet only contained tcp segment even though tcp may have infoHttp
 					 * port number, it still won't show up here since headers appear right
-					 * at the beginning of http session.
+					 * at the beginning of infoHttp session.
 					 */
 
-                    System.out.printf("http header::%s%n", http);
+                    System.out.printf("infoHttp header::%s%n", http);
 
 					/*
 					 * jNetPcap keeps track of frame numbers for us. The number is simply

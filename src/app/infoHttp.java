@@ -23,21 +23,26 @@ public class infoHttp extends Packets{
                 String temp =http.fieldValue((Http.Request.Referer));
                 String urlVisited = String.valueOf(temp);
 
-                if (!urlVisited.equals("null")){
+                if (!urlVisited.equals("null")){ // getting rid of null values
                    // System.out.println(jap);
                     set.add(urlVisited);
                 }
             }
         }
         if (x==0) { // returns a filtered set
-            HashSet<String> hashSet = new HashSet<>();
-            for (String temp : set) {
-                if (temp.endsWith("/")) {
-                   hashSet.add(temp);
-                }
-            }
-            return hashSet;
+            return filteredSet(set);
         }
         return set;
+    }
+    private HashSet<String> filteredSet(HashSet<String> set){
+        // filters for only websites
+        // websites are defined as links that have "/" at the end.
+        HashSet<String> hashSet = new HashSet<>();
+        for (String temp : set) {
+            if (temp.endsWith("/")) {
+                hashSet.add(temp);
+            }
+        }
+        return hashSet;
     }
 }

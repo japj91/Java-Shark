@@ -14,6 +14,7 @@ import java.util.*;
 
 /**
  * Created by jap on 4/8/2017.
+ * loading of the websites visited
  */
 public class urlController implements Initializable {
 
@@ -25,20 +26,21 @@ public class urlController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<File> tempList = ShareableData.getInstance().getFile();
+        ListLoader(noFilterURL,1);
+        ListLoader(filterURL,0);
+
+
+    }
+
+    private void ListLoader(ListView list, int x){
+        ArrayList<File> tempList = ShareableData.getInstance().getFile(); // get the files
         File file =tempList.get(0);
         infoHttp http = new infoHttp();
         http.load(file);
 
-        Set<String> set = http.packets(1);
+        Set<String> set = http.packets(x);
         ObservableList<String> items = FXCollections.observableArrayList(set);
-        noFilterURL.setItems(items);
-
-        Set<String> set1 = http.packets(0);
-        ObservableList<String> items1 = FXCollections.observableArrayList(set1);
-        filterURL.setItems(items1);
-
-
+        list.setItems(items);
 
     }
 }

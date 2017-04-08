@@ -1,7 +1,13 @@
 package app;
 
 import org.jnetpcap.packet.JPacket;
+import org.jnetpcap.packet.format.FormatUtils;
+import org.jnetpcap.protocol.lan.Ethernet;
+import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Http;
+import org.jnetpcap.protocol.tcpip.Tcp;
+import org.jnetpcap.protocol.tcpip.Udp;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -13,18 +19,21 @@ import java.util.HashSet;
 public class infoHttp extends Packets{
     public infoHttp(){}
 
-    public HashSet<String> packets(int x){
+    public HashSet<String> listOfURls(int x){
+        // looking for all urls that were visited.
         ArrayList<JPacket> packets = getPackets();
         Http http = new Http();
         HashSet<String> set = new HashSet<>();
+        Tcp tcp = new Tcp();
+
 
         for (JPacket packet:packets){
-            if (packet.hasHeader(http)){
+            if (packet.hasHeader(http)&& packet.hasHeader(tcp) && !http.isResponse()){
+
                 String temp =http.fieldValue((Http.Request.Referer));
                 String urlVisited = String.valueOf(temp);
 
                 if (!urlVisited.equals("null")){ // getting rid of null values
-                   // System.out.println(jap);
                     set.add(urlVisited);
                 }
             }
@@ -34,6 +43,7 @@ public class infoHttp extends Packets{
         }
         return set;
     }
+
     private HashSet<String> filteredSet(HashSet<String> set){
         // filters for only websites
         // websites are defined as links that have "/" at the end.

@@ -58,7 +58,7 @@ public class Controller {
     TextField longest;
 
     @FXML
-    TextField sourceHost;
+    ListView sourceHost;
 
     @FXML
     String sourceIP;
@@ -93,8 +93,8 @@ public class Controller {
         infoHttp http = new infoHttp();
         http.load(file);
         System.out.println();
-        System.out.println(http.packets(0));
-        System.out.println(http.packets(1));
+        System.out.println(http.listOfURls(0));
+        System.out.println(http.listOfURls(1));
     }
 
     private void networkAnalysis(File file) {
@@ -108,13 +108,14 @@ public class Controller {
         InfoTCP tcp = new InfoTCP();
         tcp.load(file);
         String ipAdderes ="";
-        for(String x: tcp.getOriginHost()){  // for loop is here in case person is capturing traffic from their router.
+        Set<String> set = tcp.getOriginHost();
+        for(String x:set ){  // for loop is here in case person is capturing traffic from their router.
             ipAdderes += x+"\n ";
         }
         ArrayList<String> user = ShareableData.getInstance().getList();
         user.add(ipAdderes.trim());
-        System.out.println(user);
-        sourceHost.setText(ipAdderes);
+        ObservableList<String> items = FXCollections.observableArrayList(set);
+        sourceHost.setItems(items);
     }
 
     public void findFile(){
@@ -225,7 +226,15 @@ public class Controller {
 
     public void normalColor(){
         sourceHostLabel.setTextFill(Color.web("#000"));
-        System.out.println("ajp");
+    }
+
+    public void alertMessage(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Source Host is defined as:\n\n- A user who is making SYN requests\n- Their ACK flag is NOT SET");
+
+        alert.showAndWait();
     }
 
 }

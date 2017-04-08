@@ -77,8 +77,8 @@ public class ClassicPcapExample {
         /***************************************************************************
          * Second we open up the selected device
          **************************************************************************/
-        int snaplen = 64 * 1024;           // Capture all packets, no trucation
-        int flags = Pcap.MODE_PROMISCUOUS; // capture all packets
+        int snaplen = 64 * 1024;           // Capture all listOfURls, no trucation
+        int flags = Pcap.MODE_PROMISCUOUS; // capture all listOfURls
         int timeout = 10 * 1000;           // 10 seconds in millis
         Pcap pcap =
                 Pcap.openLive(device.getName(), snaplen, flags, timeout, errbuf);
@@ -90,7 +90,7 @@ public class ClassicPcapExample {
         }
 
         /***************************************************************************
-         * Third we create a packet handler which will receive packets from the
+         * Third we create a packet handler which will receive listOfURls from the
          * libpcap loop.
          **************************************************************************/
         PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
@@ -108,7 +108,7 @@ public class ClassicPcapExample {
         };
 
         /***************************************************************************
-         * Fourth we enter the loop and tell it to capture 10 packets. The loop
+         * Fourth we enter the loop and tell it to capture 10 listOfURls. The loop
          * method does a mapping of pcap.datalink() DLT value to JProtocol ID, which
          * is needed by JScanner. The scanner scans the packet buffer and decodes
          * the headers. The mapping is done automatically, although a variation on

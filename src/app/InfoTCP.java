@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by jap on 4/5/2017.
  * General TCP class
- * info on TCP packets
+ * info on TCP listOfURls
  */
 public class InfoTCP  extends  Packets{
     ArrayList<JPacket> jPackets;

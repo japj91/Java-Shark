@@ -21,7 +21,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
  * file used in this example can be found under the "tests" directory located
  * under the root installation directory of the source package. The tests
  * directory is not normally provided with binary distribution of jnetpcap. The
- * test file contains 483 packets most of which are infoHttp or tcp segments.
+ * test file contains 483 listOfURls most of which are infoHttp or tcp segments.
  *
  * @author Mark Bednarczyk
  * @author Sly Technologies, Inc.
@@ -37,7 +37,7 @@ public class DecodeUsingJNetPcap {
     public static void main(String[] args) {
 
 		/*
-		 * Example #1 open offline capture file for reading packets.
+		 * Example #1 open offline capture file for reading listOfURls.
 		 */
         final String FILENAME = "test.pcap";
         final StringBuilder errbuf = new StringBuilder();
@@ -49,9 +49,9 @@ public class DecodeUsingJNetPcap {
         }
 
 		/*
-		 * We have an opened the capture file now time to read packets. We use a
-		 * Pcap.loop function to retrieve 10 packets from the file. We supply an
-		 * annonymous handler which will receive packets as they are read from the
+		 * We have an opened the capture file now time to read listOfURls. We use a
+		 * Pcap.loop function to retrieve 10 listOfURls from the file. We supply an
+		 * annonymous handler which will receive listOfURls as they are read from the
 		 * offline file by libpcap. We parameterize it with a StringBuilder class.
 		 * This allows us to pass in any type of object we need inside the our
 		 * dispatch handler. For this example we are passing in the errorbuf object
@@ -77,9 +77,9 @@ public class DecodeUsingJNetPcap {
             final Http http = new Http();
 
             /**
-             * Our custom handler that will receive all the packets libpcap will
+             * Our custom handler that will receive all the listOfURls libpcap will
              * dispatch to us. This handler is inside a libpcap loop and will receive
-             * exactly 10 packets as we specified on the Pcap.loop(10, ...) line
+             * exactly 10 listOfURls as we specified on the Pcap.loop(10, ...) line
              * above.
              *
              * @param packet
@@ -154,8 +154,8 @@ public class DecodeUsingJNetPcap {
         }, errbuf);
 
 		/*
-		 * Now that we have captured our 10 packets, lets use Pcap.nextEx to get the
-		 * next 5 packets. We will also reset the frame number back to 0 just so we
+		 * Now that we have captured our 10 listOfURls, lets use Pcap.nextEx to get the
+		 * next 5 listOfURls. We will also reset the frame number back to 0 just so we
 		 * can see how its done. Each scanner keeps track of its own frame numbers,
 		 * so we want to get the default one, for this thread, and change it there.
 		 */
@@ -175,9 +175,9 @@ public class DecodeUsingJNetPcap {
 		/*
 		 * Each packet scanned, also has a flow key associated with it. The flow key
 		 * is generated based on the headers in each packet and stored with packet
-		 * state. We can use the flow key to uniquely identify packets belonging to
-		 * the same stream of packets between end host systems. We will keep a map
-		 * of various flows with packets in it.
+		 * state. We can use the flow key to uniquely identify listOfURls belonging to
+		 * the same stream of listOfURls between end host systems. We will keep a map
+		 * of various flows with listOfURls in it.
 		 */
         final Map<JFlowKey, JFlow> flows = new HashMap<JFlowKey, JFlow>();
 
@@ -188,10 +188,10 @@ public class DecodeUsingJNetPcap {
 			/*
 			 * A hashmap uses the equals method to determine if a key is already
 			 * present in the map or not and to retrieve values. jNetPcap provides us
-			 * with a special object called a JFlow which keeps a list of packets part
-			 * of that flow. We can add new packets to a flow and later we can get a
-			 * list of those packets. So first we check if a flow for a given key
-			 * already exists. All packets part of the same flow will have the same
+			 * with a special object called a JFlow which keeps a list of listOfURls part
+			 * of that flow. We can add new listOfURls to a flow and later we can get a
+			 * list of those listOfURls. So first we check if a flow for a given key
+			 * already exists. All listOfURls part of the same flow will have the same
 			 * key.
 			 */
             JFlow flow = flows.get(key);
@@ -205,7 +205,7 @@ public class DecodeUsingJNetPcap {
 			 * queue for later processing, we must first make a copy of the packet to
 			 * a new object. We can only process each libpcap packet immediately
 			 * before any other calls or nextEx or another iteration of a loop. The
-			 * packets are delivered to us without copies so what we are working with
+			 * listOfURls are delivered to us without copies so what we are working with
 			 * is the data within libpcap buffer. If we want to preserve a packet
 			 * beyond this point, we have to make a copy of the packet and its decoded
 			 * state and then we can keep the packet around for as long as its needed.
@@ -216,27 +216,27 @@ public class DecodeUsingJNetPcap {
         }
 
 		/*
-		 * Now that we added 50 packets to various flows maintained by the flows
-		 * Map, we can now access those flows and the packet within it. The packets
+		 * Now that we added 50 listOfURls to various flows maintained by the flows
+		 * Map, we can now access those flows and the packet within it. The listOfURls
 		 * are now grouped into flows.
 		 */
 
         for (JFlow flow : flows.values()) {
 
 			/*
-			 * Flows can be bi-directional. That is packets going between host A and B
-			 * would be considered in forward-direction, while packets between host B
+			 * Flows can be bi-directional. That is listOfURls going between host A and B
+			 * would be considered in forward-direction, while listOfURls between host B
 			 * and A can be considered reserverse direction. Although both forward and
 			 * reverse are going in the opposite directions, jnetpcap flows consider
 			 * them the same flows. You have 3 types of accessors for retrieving
-			 * packets from a flow. JFlow.getForward, JFlow.getReverse or
-			 * JFlow.getAll. JFlow.getAll gets a list of packets, no matter which
+			 * listOfURls from a flow. JFlow.getForward, JFlow.getReverse or
+			 * JFlow.getAll. JFlow.getAll gets a list of listOfURls, no matter which
 			 * direction they are going, while the other 2 accessors only get the
-			 * packets that are going in the specified direction.
+			 * listOfURls that are going in the specified direction.
 			 */
             if (flow.isReversable()) {
 				/*
-				 * We can get directional flow packets, but only if the  is
+				 * We can get directional flow listOfURls, but only if the  is
 				 * reversable. Not all flows are reversable and this is determined by
 				 * the header types. If a flow is not reversable, flow.getReverse will
 				 * return empty list, which is something we don't want to have to
@@ -256,8 +256,8 @@ public class DecodeUsingJNetPcap {
             } else {
 
 				/*
-				 * Otherwise we have to get All the packets and there is no
-				 * forward/reverse direction associated with the packets. Here is how we
+				 * Otherwise we have to get All the listOfURls and there is no
+				 * forward/reverse direction associated with the listOfURls. Here is how we
 				 * can do this a little more compactly.
 				 */
                 for (JPacket p : flow.getAll()) {
@@ -268,22 +268,22 @@ public class DecodeUsingJNetPcap {
         }
 
 		/*
-		 * We still haven't read all the packets from our offline file. Here is an
-		 * easier way to retrieve all the packets while grouping them into flows.
+		 * We still haven't read all the listOfURls from our offline file. Here is an
+		 * easier way to retrieve all the listOfURls while grouping them into flows.
 		 * jNetPcap provides a neat little class that does all of the above work for
 		 * us. Its called JFlowMap, not only that it implements a JPacketHandler
 		 * interface suitable for usage with Pcap.loop or Pcap.dispatch calls and it
-		 * will add all packets received into appropriate flows.
+		 * will add all listOfURls received into appropriate flows.
 		 */
         JFlowMap superFlowMap = new JFlowMap();
 
 		/*
-		 * So lets finish this file off, and read the remaining packets into our new
+		 * So lets finish this file off, and read the remaining listOfURls into our new
 		 * superFlowMap and do a pretty print of all the flows it finds. The 3rd
 		 * argument to Pcap.loop is unused so we just set it to null.
 		 * Pcap.LOOP_INFINITE flag tells the Pcap.loop method to read all the
-		 * packets until the end of file. Since we already read some packets, this
-		 * will read remaining packets from the current position in the file until
+		 * listOfURls until the end of file. Since we already read some listOfURls, this
+		 * will read remaining listOfURls from the current position in the file until
 		 * the end.
 		 */
         pcap.loop(Pcap.LOOP_INFINITE, superFlowMap, null);
@@ -291,7 +291,7 @@ public class DecodeUsingJNetPcap {
         System.out.printf("superFlowMap::%s%n", superFlowMap);
 
 		/*
-		 * Now we have read the remaining packets and we no longer need to keep the
+		 * Now we have read the remaining listOfURls and we no longer need to keep the
 		 * pcap file open.
 		 */
         pcap.close();

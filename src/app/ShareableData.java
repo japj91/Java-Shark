@@ -24,7 +24,7 @@ public class ShareableData {
             return hostUser;
         }
 
-        private HashMap<String,Integer> bytesPerIP = new HashMap<>(); // this map gets set in geninfo packets method
+        private HashMap<String,Integer> bytesPerIP = new HashMap<>(); // this map gets set in geninfo listOfURls method
 
         public HashMap<String,Integer> getBytesPerIP(){
             return bytesPerIP;

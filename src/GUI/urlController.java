@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * Created by jap on 4/8/2017.
  * loading of the websites visited
+ * might need to get rid of second filtered tab
  */
 public class urlController implements Initializable {
 
@@ -38,7 +39,7 @@ public class urlController implements Initializable {
         infoHttp http = new infoHttp();
         http.load(file);
 
-        Set<String> set = http.packets(x);
+        Set<String> set = http.listOfURls(x);
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
 

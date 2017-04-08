@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,6 +29,9 @@ public class Controller {
 
     @FXML
     Label textArea;
+
+    @FXML
+    Label sourceHostLabel;
 
     @FXML
     ListView<String> list;
@@ -187,6 +191,14 @@ public class Controller {
 
         gen.networkTraffic();
 
+    }
+
+    public void setColor(){
+        sourceHostLabel.setTextFill(Color.web("#0076a3"));
+    }
+    public void normalColor(){
+        sourceHostLabel.setTextFill(Color.web("#000"));
+        System.out.println("ajp");
     }
 
 }

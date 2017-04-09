@@ -25,19 +25,32 @@ public class infoHttp extends Packets{
         Http http = new Http();
         HashSet<String> set = new HashSet<>();
         Tcp tcp = new Tcp();
-
+        HashSet<String> string = new HashSet<>();
 
         for (JPacket packet:packets){
-            if (packet.hasHeader(http)&& packet.hasHeader(tcp) && !http.isResponse()){
+            if (packet.hasHeader(http)){
 
                 String temp =http.fieldValue((Http.Request.Referer));
+                String temp2 = http.fieldValue(Http.Request.Host);
+
+                String w = String.valueOf(temp2);
+               // System.out.println(w);
+
+//                string.add(w);
+                // can implement this will print names differently go to line 51 - 53 for print statment
+
+
                 String urlVisited = String.valueOf(temp);
 
                 if (!urlVisited.equals("null")){ // getting rid of null values
                     set.add(urlVisited);
                 }
             }
+
         }
+//        for (String xx:string){
+//            System.out.println(xx);
+//        }
         if (x==0) { // returns a filtered set
             return filteredSet(set);
         }

@@ -28,6 +28,8 @@ public class Controller {
 
     @FXML
     private Label textArea;
+    @FXML
+    TextField mbTotal;
 
     @FXML
     private Label sourceHostLabel;
@@ -53,12 +55,6 @@ public class Controller {
     @FXML
     private String sourceIP;
 
-
-
-
-
-    public Controller(){}
-
     public void MainWindowLoader(){
         // when open file is chossen comes here
         // users selects file and then the popup is filled up
@@ -67,13 +63,14 @@ public class Controller {
 
         File file = load();
 
-        ArrayList<File> tempFile = ShareableData.getInstance().getFile();
-        tempFile.add(file);
+        if (file !=null) {
+            ArrayList<File> tempFile = ShareableData.getInstance().getFile();
+            tempFile.add(file);
 
-        ipLoad(file);
-        genInfo(file);
-        TCP(file);
-
+            ipLoad(file);
+            genInfo(file);
+            TCP(file);
+        }
     }
 
     private void Http(File file) {
@@ -154,10 +151,10 @@ public class Controller {
     public File load(){
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
-        if(file==null){
-            System.out.println("No File Choosen");
-            System.exit(1);
+        if (file==null){
+            return null;
         }
+
 
         return file;
     }
@@ -198,13 +195,19 @@ public class Controller {
     public void genInfo(File file ){
         generalInfo gen = new generalInfo();
         gen.load(file);
-        packetTotal.setText(gen.numPackets());
 
+        packetTotal.setText(gen.numPackets());
         longest.setText(gen.largestPacket());
         shortest.setText(gen.shortestPacket());
         time.setText(gen.timeForCapture()+" secs");
+        mbTotal.setText(gen.networkTraffic());
 
-        gen.networkTraffic();
+        packetTotal.setEditable(false);
+        longest.setEditable(false);
+        shortest.setEditable(false);
+        time.setEditable(false);
+        mbTotal.setEditable(false);
+
 
     }
 

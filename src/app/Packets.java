@@ -17,7 +17,7 @@ public class Packets {
     }
 
     public void load(File file){
-        // loading of all listOfURls into a array list
+        // loading of all packets into a array list
         final StringBuilder errbuf = new StringBuilder();
         Pcap pcap = Pcap.openOffline(file.getAbsolutePath(),errbuf);
 

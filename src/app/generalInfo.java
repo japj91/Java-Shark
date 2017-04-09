@@ -56,13 +56,18 @@ public class generalInfo  extends Packets{
 
     }
 
-    public void networkTraffic(){
+    public String networkTraffic(){
         // method tells u how many bytes are in the file
-        int x =0;
+         int x =0;
         for(JPacket Packet:jPackets){
 
-            x+=Packet.size();
+            x+=Packet.size();// gets lenght of the packet
+
         }
-        System.out.println(x+" amount of bytes in the file being transfered");
+        double totalSizeOfPackets =(double) x/ 1000000;
+        System.out.println(x+" bytes in file");
+        String size = String.format("%.2f",totalSizeOfPackets);
+
+        return size;
     }
 }

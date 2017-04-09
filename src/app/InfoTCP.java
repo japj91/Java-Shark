@@ -3,8 +3,11 @@ package app;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Tcp;
+import org.omg.CORBA.INTERNAL;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,44 +16,62 @@ import java.util.Set;
  * General TCP class
  * info on TCP listOfURls
  */
-public class InfoTCP  extends  Packets{
+public class InfoTCP extends Packets {
     ArrayList<JPacket> jPackets;
 
-    public InfoTCP(){
+    public InfoTCP() {
         jPackets = new ArrayList<>();
         jPackets = getPackets();
     }
 
-    private ArrayList<JPacket> OriginHost(){
+
+    public String getOriginHost() {
+        // two helper functions to create an array list of all TCP packets with certain flags set
+        // other is to find the source host
+
+        ArrayList<JPacket> hostPackets = OriginHost();
+        Ip4 ip = new Ip4();
+        HashMap<String, Integer> hosts = new HashMap<>();
+
+        for (JPacket packet : hostPackets) {
+            if (packet.hasHeader(ip)) {
+                byte[] myListSource;
+                myListSource = ip.source();
+                String source = org.jnetpcap.packet.format.FormatUtils.ip(myListSource);
+                hosts.put(source, packet.size());
+            }
+        }
+        return getHost(hosts);
+    }
+
+    private ArrayList<JPacket> OriginHost() {
         Tcp tcp = new Tcp();
         ArrayList<JPacket> packTempList = new ArrayList<>();
 
-        for(JPacket packet: jPackets){
-            if (packet.hasHeader(tcp)){
-                if (tcp.flags_SYN() && !tcp.flags_ACK()){
-                   packTempList.add(packet);
+        for (JPacket packet : jPackets) {
+            if (packet.hasHeader(tcp)) {
+                if (tcp.flags_SYN() && !tcp.flags_ACK()) {
+                    packTempList.add(packet);
 
                 }
             }
         }
-
         return packTempList;
     }
 
-    public Set<String> getOriginHost(){
-        ArrayList<JPacket> hostPackets = OriginHost();
-        Ip4 ip = new Ip4();
-        HashSet<String> hosts = new HashSet<>();
+    private String getHost(HashMap<String, Integer> map) {
+        int x = Integer.MIN_VALUE;
+        String temp = "";
+        Set<String> set = map.keySet();
 
-        for (JPacket packet: hostPackets){
-            if (packet.hasHeader(ip)){
-                byte[] myListSource;
-                myListSource = ip.source();
-                String source = org.jnetpcap.packet.format.FormatUtils.ip(myListSource);
-                hosts.add(source);
+        for (String key : set) {
+            int sizeOfPacket = map.get(key);
+            if (sizeOfPacket > x) {
+                x = sizeOfPacket;
+                temp = key;
             }
         }
-        return hosts;
+        return temp;
     }
 
 

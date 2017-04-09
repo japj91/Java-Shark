@@ -1,12 +1,14 @@
 package GUI;
 
 import app.ShareableData;
+import app.netAnalysis;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -46,9 +48,16 @@ public class networkAnalysisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ArrayList<File> fileList = ShareableData.getInstance().getFile();
 
-        setChart(ShareableData.getInstance().getBytesPerIP(), byteCount, byteChart);
-        setChart(ShareableData.getInstance().getPacketsPerIp(), packetCount, packetChart);
+        netAnalysis net = new netAnalysis();
+        net.load(fileList.get(0));
+
+        HashMap<String,Integer> packetMap  = net.packetsPerIp();
+        HashMap<String,Integer> byteMap= net.bytesPerIP();
+
+        setChart(byteMap, byteCount, byteChart);
+        setChart(packetMap, packetCount, packetChart);
 
     }
 
@@ -66,7 +75,9 @@ public class networkAnalysisController implements Initializable {
         // putting the graph togethere
         // have to get the source host
         // create a map that has the num of listOfURls as the key b/c u only want to show top 5
-        map.remove(ShareableData.getInstance().getList().get(0)); // removing the host user from graph the admin doesnt need to see how often they are the source
+        map.remove(ShareableData.getInstance().getHostUserList().get(0));// removing the host user from graph the admin doesnt need to see how often they are the source
+
+
 
         TreeMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
         XYChart.Series series = new XYChart.Series<>();
@@ -87,6 +98,9 @@ public class networkAnalysisController implements Initializable {
         }
         chart.getData().addAll(series);
     }
+
+
+
 
 
 }

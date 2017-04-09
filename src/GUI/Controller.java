@@ -27,52 +27,41 @@ import java.util.Set;
 public class Controller {
 
     @FXML
-    Label textArea;
+    private Label textArea;
 
     @FXML
-    Label sourceHostLabel;
+    private Label sourceHostLabel;
 
     @FXML
-    ListView<String> list;
+    private ListView<String> list;
 
     @FXML
-    ListView<String> openList;
+    private TextField packetTotal;
 
     @FXML
-    TextArea FileName;
-
-
-    @FXML
-    Button OpenFileChooser;
+    private TextField time;
 
     @FXML
-    TextField packetTotal;
+    private TextField shortest;
 
     @FXML
-    TextField time;
+    private TextField longest;
 
     @FXML
-    TextField shortest;
+    private ListView sourceHost;
 
     @FXML
-    TextField longest;
-
-    @FXML
-    ListView sourceHost;
-
-    @FXML
-    String sourceIP;
+    private String sourceIP;
 
 
 
-    String fileName;
+
 
     public Controller(){}
 
     public void MainWindowLoader(){
         // when open file is chossen comes here
         // users selects file and then the popup is filled up
-        // Can implement second window but windows arent able to communicate
         // error shows up but to show bassically make the open button launch openFilechooser then on second GUI make file button
         // launch MainWindowLoader
 
@@ -84,12 +73,11 @@ public class Controller {
         ipLoad(file);
         genInfo(file);
         TCP(file);
-        networkAnalysis(file);
-        Http(file);
 
     }
 
     private void Http(File file) {
+        // probally dead code
         infoHttp http = new infoHttp();
         http.load(file);
         System.out.println();
@@ -98,23 +86,23 @@ public class Controller {
     }
 
     private void networkAnalysis(File file) {
-        netAnalysis net = new netAnalysis();
-        net.load(file);
-        net.mapping();
-        net.packetSize();
+        // probalyy dead code
+//        netAnalysis net = new netAnalysis();
+//        net.load(file);
+//        net.packetsPerIp();
+//        net.bytesPerIP();
     }
 
     private void TCP(File file) {
         InfoTCP tcp = new InfoTCP();
         tcp.load(file);
-        String ipAdderes ="";
-        Set<String> set = tcp.getOriginHost();
-        for(String x:set ){  // for loop is here in case person is capturing traffic from their router.
-            ipAdderes += x+"\n ";
-        }
-        ArrayList<String> user = ShareableData.getInstance().getList();
-        user.add(ipAdderes.trim());
-        ObservableList<String> items = FXCollections.observableArrayList(set);
+
+        String IpSource = tcp.getOriginHost();
+
+        ArrayList<String> user = ShareableData.getInstance().getHostUserList();
+        user.add(IpSource.trim());
+
+        ObservableList<String> items = FXCollections.observableArrayList(IpSource);
         sourceHost.setItems(items);
     }
 
@@ -122,11 +110,11 @@ public class Controller {
         // probally dead code
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
-        fileName = file.getAbsolutePath();
+        String fileName = file.getAbsolutePath();
         System.out.println(fileName);
 
         textArea.setText(fileName);
-        final StringBuilder errbuf = new StringBuilder();
+
     }
 
     public void openNetworkAnalysis(){

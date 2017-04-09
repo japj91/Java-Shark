@@ -18,7 +18,7 @@ public class netAnalysis  extends Packets{
         this.jPackets = getPackets();
     }
 
-    public void  mapping(){
+    public HashMap<String,Integer> packetsPerIp(){
         HashMap<String, Integer> packetMap = new HashMap<>();
         Ip4 ip = new Ip4();
         byte[] list;
@@ -39,13 +39,12 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
-        HashMap<String,Integer> map = ShareableData.getInstance().getPacketsPerIp();
-        map.putAll(packetMap);
-        System.out.println(packetMap);
 
+        System.out.println(packetMap);
+        return packetMap;
     }
 
-    public void packetSize(){
+    public HashMap<String,Integer> bytesPerIP(){
         HashMap<String,Integer> packetMap = new HashMap<>();
         Ip4 ip = new Ip4();
         byte[] stanList;
@@ -68,8 +67,8 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
-        HashMap<String,Integer> map = ShareableData.getInstance().getBytesPerIP();
-        map.putAll(packetMap);
+
         System.out.println(packetMap);
+        return packetMap;
     }
 }

@@ -20,6 +20,7 @@ import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
 
+import javax.sound.sampled.Line;
 import javax.xml.soap.Text;
 import java.io.File;
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class Controller {
             genInfo(file);
             TCP(file);
             UDP(file);
+            test2(file);
         }
     }
 
@@ -193,7 +195,13 @@ public class Controller {
 
 
     }
+    public void test2(File file){
+        InfoTCP port = new InfoTCP();
 
+        port.load(file);
+
+        System.out.println(port.getPorts().toString());
+    }
     public void ipLoad(File file){
 
         ipAddresses ipAddresses = new ipAddresses();

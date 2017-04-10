@@ -74,5 +74,18 @@ public class InfoTCP extends Packets {
         return temp;
     }
 
+    public HashMap<Integer, Integer> getPorts() {
+        HashMap<Integer, Integer> ports = new HashMap<>();
 
+        for (JPacket packet : jPackets) {
+            if (packet.hasHeader(tcp)) {
+                if (ports.containsKey(tcp.destination())) {
+                    ports.put(tcp.destination(), ports.get(tcp.destination()) + 1);
+                } else {
+                    ports.put(tcp.destination(), 1);
+                }
+            }
+        }
+        return ports;
+    }
 }

@@ -21,8 +21,10 @@ public class Packets {
         final StringBuilder errbuf = new StringBuilder();
         Pcap pcap = Pcap.openOffline(file.getAbsolutePath(),errbuf);
 
-        pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
+        pcap.loop(-1, new JPacketHandler<StringBuilder>() {
+
             public void nextPacket(JPacket packet, StringBuilder stringBuilder) {
+
                 packets.add(packet);
             }
             }, errbuf);

@@ -29,8 +29,6 @@ import java.util.Set;
 public class Controller {
 
     @FXML
-    private Label textArea;
-    @FXML
     TextField mbTotal;
 
     @FXML
@@ -75,15 +73,11 @@ public class Controller {
             ipLoad(file);
             genInfo(file);
             TCP(file);
-            UDP(file);
+            setNonEditable();
         }
     }
 
-    private void UDP(File file) {
-        infoUDP udp = new infoUDP();
-        udp.load(file);
-        System.out.println(udp.numOfUDP()+" of udp packets");
-    }
+
 
 
     private void Http(File file) {
@@ -123,7 +117,6 @@ public class Controller {
         String fileName = file.getAbsolutePath();
         System.out.println(fileName);
 
-        textArea.setText(fileName);
 
     }
 
@@ -219,12 +212,6 @@ public class Controller {
         ObservableList<String> items = FXCollections.observableArrayList(gen.packetTypes());
         typesList.setItems(items);
 
-        packetTotal.setEditable(false);
-        longest.setEditable(false);
-        shortest.setEditable(false);
-        time.setEditable(false);
-        mbTotal.setEditable(false);
-
 
     }
 
@@ -243,6 +230,18 @@ public class Controller {
         alert.setContentText("Source Host is defined as:\n\n- A user who is making SYN requests\n- Their ACK flag is NOT SET");
 
         alert.showAndWait();
+    }
+
+    private void setNonEditable(){
+        packetTotal.setEditable(false);
+        longest.setEditable(false);
+        shortest.setEditable(false);
+        time.setEditable(false);
+        mbTotal.setEditable(false);
+        longest.setEditable(false);
+        typesList.setEditable(false);
+        list.setEditable(false);
+
     }
 
 }

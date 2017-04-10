@@ -26,7 +26,7 @@ public class infoHttp extends Packets{
 
         HashSet<String> set = new HashSet<>();
 
-        HashSet<String> string = new HashSet<>();
+        //HashSet<String> string = new HashSet<>();
 
         for (JPacket packet:packets){
             if (packet.hasHeader(http)){

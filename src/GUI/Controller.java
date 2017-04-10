@@ -20,8 +20,10 @@ import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
 
+import javax.xml.soap.Text;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -42,6 +44,9 @@ public class Controller {
 
     @FXML
     private TextField time;
+
+    @FXML
+    ListView typesList;
 
     @FXML
     private TextField shortest;
@@ -70,8 +75,16 @@ public class Controller {
             ipLoad(file);
             genInfo(file);
             TCP(file);
+            UDP(file);
         }
     }
+
+    private void UDP(File file) {
+        infoUDP udp = new infoUDP();
+        udp.load(file);
+        System.out.println(udp.numOfUDP()+" of udp packets");
+    }
+
 
     private void Http(File file) {
         // probally dead code
@@ -190,6 +203,7 @@ public class Controller {
         sourceIP = String.valueOf(set);
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
+
     }
 
     public void genInfo(File file ){
@@ -201,6 +215,9 @@ public class Controller {
         shortest.setText(gen.shortestPacket());
         time.setText(gen.timeForCapture()+" secs");
         mbTotal.setText(gen.networkTraffic());
+
+        ObservableList<String> items = FXCollections.observableArrayList(gen.packetTypes());
+        typesList.setItems(items);
 
         packetTotal.setEditable(false);
         longest.setEditable(false);

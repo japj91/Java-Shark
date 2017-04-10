@@ -2,9 +2,14 @@ package app;
 
 import com.sun.xml.internal.ws.api.message.Packet;
 import org.jnetpcap.packet.JPacket;
+import org.jnetpcap.packet.annotate.Protocol;
+import org.jnetpcap.protocol.tcpip.Tcp;
+import org.jnetpcap.protocol.tcpip.Udp;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by jap on 4/5/2017.
@@ -14,6 +19,9 @@ import java.util.ArrayList;
  */
 public class generalInfo  extends Packets{
     ArrayList<JPacket> jPackets;
+    Tcp tcp = new Tcp();
+    Udp udp = new Udp();
+
 
     public generalInfo(){
         jPackets = new ArrayList<>();
@@ -70,4 +78,23 @@ public class generalInfo  extends Packets{
 
         return size;
     }
+
+    public ArrayList<String> packetTypes(){
+        ArrayList<String> map = new ArrayList<>();
+        int udpCount = 0;
+        int tcpCount = 0;
+        for(JPacket packet:jPackets){
+            if (packet.hasHeader(tcp)){
+                tcpCount++;
+            }
+            else if (packet.hasHeader(udp)){
+                udpCount++;
+            }
+        }
+        map.add(String.format("TCP packets %s",tcpCount));
+        map.add(String.format("UDP packets %s",udpCount));
+        return map;
+    }
+
+
 }

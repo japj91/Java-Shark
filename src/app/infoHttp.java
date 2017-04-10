@@ -17,14 +17,15 @@ import java.util.HashSet;
  * Grab URLs that were visited by user
  */
 public class infoHttp extends Packets{
+    Http http = new Http();
     public infoHttp(){}
 
     public HashSet<String> listOfURls(int x){
         // looking for all urls that were visited.
         ArrayList<JPacket> packets = getPackets();
-        Http http = new Http();
+
         HashSet<String> set = new HashSet<>();
-        Tcp tcp = new Tcp();
+
         HashSet<String> string = new HashSet<>();
 
         for (JPacket packet:packets){

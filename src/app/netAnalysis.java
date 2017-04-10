@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class netAnalysis  extends Packets{
 
     ArrayList<JPacket> jPackets;
-
+    Ip4 ip = new Ip4();
     public netAnalysis(){
         jPackets = new ArrayList<>();
         this.jPackets = getPackets();
@@ -20,7 +20,6 @@ public class netAnalysis  extends Packets{
 
     public HashMap<String,Integer> packetsPerIp(){
         HashMap<String, Integer> packetMap = new HashMap<>();
-        Ip4 ip = new Ip4();
         byte[] list;
 
         for(JPacket packet: jPackets){
@@ -46,7 +45,7 @@ public class netAnalysis  extends Packets{
 
     public HashMap<String,Integer> bytesPerIP(){
         HashMap<String,Integer> packetMap = new HashMap<>();
-        Ip4 ip = new Ip4();
+
         byte[] stanList;
 
         for(JPacket packet: jPackets){

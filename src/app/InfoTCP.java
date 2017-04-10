@@ -18,12 +18,12 @@ import java.util.Set;
  */
 public class InfoTCP extends Packets {
     ArrayList<JPacket> jPackets;
+    Tcp tcp = new Tcp();
 
     public InfoTCP() {
         jPackets = new ArrayList<>();
         jPackets = getPackets();
     }
-
 
     public String getOriginHost() {
         // two helper functions to create an array list of all TCP packets with certain flags set
@@ -45,7 +45,7 @@ public class InfoTCP extends Packets {
     }
 
     private ArrayList<JPacket> OriginHost() {
-        Tcp tcp = new Tcp();
+
         ArrayList<JPacket> packTempList = new ArrayList<>();
 
         for (JPacket packet : jPackets) {

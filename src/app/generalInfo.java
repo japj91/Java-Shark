@@ -1,15 +1,14 @@
 package app;
 
-import com.sun.xml.internal.ws.api.message.Packet;
 import org.jnetpcap.packet.JPacket;
-import org.jnetpcap.packet.annotate.Protocol;
+
+import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.network.Ip6;
 import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * Created by jap on 4/5/2017.
@@ -21,6 +20,8 @@ public class generalInfo  extends Packets{
     ArrayList<JPacket> jPackets;
     Tcp tcp = new Tcp();
     Udp udp = new Udp();
+    Ip4 ip4 = new Ip4();
+    Ip6 ip6 = new Ip6();
 
 
     public generalInfo(){
@@ -73,7 +74,7 @@ public class generalInfo  extends Packets{
 
         }
         double totalSizeOfPackets =(double) x/ 1000000;
-        System.out.println(x+" bytes in file");
+
         String size = String.format("%.2f",totalSizeOfPackets);
 
         return size;
@@ -83,18 +84,53 @@ public class generalInfo  extends Packets{
         ArrayList<String> map = new ArrayList<>();
         int udpCount = 0;
         int tcpCount = 0;
+        int ipv4 = 0;
+        int ipv6 = 0;
+
         for(JPacket packet:jPackets){
-            if (packet.hasHeader(tcp)){
-                tcpCount++;
-            }
-            else if (packet.hasHeader(udp)){
-                udpCount++;
-            }
+            tcpCount += checkTCPheader(packet);
+            udpCount += checkUDPHeader(packet);
+            ipv4 += checkipv4Header(packet );
+            ipv6 += checkIpv6Header(packet);
         }
+
         map.add(String.format("TCP packets %s",tcpCount));
         map.add(String.format("UDP packets %s",udpCount));
+        map.add(String.format("IPv4 packets %s",ipv4));
+        map.add(String.format("IPv6 packets %s",ipv6));
         return map;
     }
+    
+    private int checkipv4Header(JPacket packet){
+        if (packet.hasHeader(ip4)){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private int checkIpv6Header(JPacket packet){
+        if (packet.hasHeader(ip6)){
+            return 1;
+        }
+        return 0;
+    }
+
+    private int checkTCPheader(JPacket packet){
+        if (packet.hasHeader(tcp)){
+            return 1;
+        }
+        return 0;
+    }
+
+    private int checkUDPHeader(JPacket packet){
+        if (packet.hasHeader(udp)){
+            return 1;
+        }
+        return 0;
+    }
+
 
 
 }

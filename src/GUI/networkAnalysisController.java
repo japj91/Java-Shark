@@ -1,7 +1,7 @@
 package GUI;
 
 import app.ShareableData;
-import app.netAnalysis;
+import app.networkAnalysis;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -50,7 +50,7 @@ public class networkAnalysisController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ArrayList<File> fileList = ShareableData.getInstance().getFile();
 
-        netAnalysis net = new netAnalysis();
+        networkAnalysis net = new networkAnalysis();
         net.load(fileList.get(0));
 
         HashMap<String,Integer> packetMap  = net.packetsPerIp();

@@ -9,11 +9,11 @@ import java.util.HashMap;
 /**
  * Created by jap on 4/5/2017.
  */
-public class netAnalysis  extends Packets{
+public class networkAnalysis extends Packets{
 
     ArrayList<JPacket> jPackets;
     Ip4 ip = new Ip4();
-    public netAnalysis(){
+    public networkAnalysis(){
         jPackets = new ArrayList<>();
         this.jPackets = getPackets();
     }

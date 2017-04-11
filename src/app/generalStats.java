@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Shortest longest time
  * wanted to put in packet calss but b/c its super class did not put in there
  */
-public class generalInfo  extends Packets{
+public class generalStats extends Packets{
     ArrayList<JPacket> jPackets;
     Tcp tcp = new Tcp();
     Udp udp = new Udp();
@@ -24,7 +24,7 @@ public class generalInfo  extends Packets{
     Ip6 ip6 = new Ip6();
 
 
-    public generalInfo(){
+    public generalStats(){
         jPackets = new ArrayList<>();
         this.jPackets = getPackets();
     }

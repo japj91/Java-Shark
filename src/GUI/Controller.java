@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -20,12 +18,8 @@ import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
 
-import javax.sound.sampled.Line;
-import javax.xml.soap.Text;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -93,7 +87,7 @@ public class Controller {
 
     private void networkAnalysis(File file) {
         // probalyy dead code
-//        netAnalysis net = new netAnalysis();
+//        networkAnalysis net = new networkAnalysis();
 //        net.load(file);
 //        net.packetsPerIp();
 //        net.bytesPerIP();
@@ -199,9 +193,9 @@ public class Controller {
 
     public void ipLoad(File file){
 
-        ipAddresses ipAddresses = new ipAddresses();
-        ipAddresses.load(file);
-        Set<String> set = ipAddresses.getIPAdderres();
+        infoIP infoIP = new infoIP();
+        infoIP.load(file);
+        Set<String> set = infoIP.getIPAdderres();
 
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
@@ -209,7 +203,7 @@ public class Controller {
     }
 
     public void genInfo(File file ){
-        generalInfo gen = new generalInfo();
+        generalStats gen = new generalStats();
         gen.load(file);
 
         packetTotal.setText(gen.numPackets());

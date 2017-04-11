@@ -1,7 +1,6 @@
 package app;
 
 
-import java.io.File;
 import java.util.*;
 
 import org.jnetpcap.packet.JPacket;
@@ -10,7 +9,6 @@ import org.jnetpcap.protocol.network.Ip6;
 
 public class infoIP extends Packets {
     Ip4 ip4 = new Ip4();
-    Ip6 ip6 = new Ip6();
     ArrayList<JPacket> packets;
 
     public infoIP(){

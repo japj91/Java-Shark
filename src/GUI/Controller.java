@@ -2,7 +2,6 @@ package GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,13 +14,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import app.*;
-import org.jnetpcap.packet.JPacket;
-import org.jnetpcap.protocol.tcpip.Tcp;
 
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -73,29 +69,9 @@ public class Controller {
             genInfo(file);
             TCP(file);
             setNonEditable();
-            test2(file);
+            ports(file);
 
         }
-    }
-
-
-
-
-    private void Http(File file) {
-        // probally dead code
-        infoHttp http = new infoHttp();
-        http.load(file);
-        System.out.println();
-        System.out.println(http.listOfURls(0));
-        System.out.println(http.listOfURls(1));
-    }
-
-    private void networkAnalysis(File file) {
-        // probalyy dead code
-//        networkAnalysis net = new networkAnalysis();
-//        net.load(file);
-//        net.packetsPerIp();
-//        net.bytesPerIP();
     }
 
     private void TCP(File file) {
@@ -109,16 +85,6 @@ public class Controller {
 
         ObservableList<String> items = FXCollections.observableArrayList(IpSource);
         sourceHost.setItems(items);
-    }
-
-    public void findFile(){
-        // probally dead code
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(null);
-        String fileName = file.getAbsolutePath();
-        System.out.println(fileName);
-
-
     }
 
     public void openNetworkAnalysis(){
@@ -166,29 +132,7 @@ public class Controller {
         return file;
     }
 
-    public void test(){
-        // below is a test method
-        // wanted to return pcap objects from Packets
-
-        File file = new File("test.pcap");
-        Packets tcp = new Packets();
-
-        tcp.load(file);
-        ArrayList<JPacket> j = tcp.getPackets();
-
-        int xa = 0;
-
-        for(JPacket x :j){
-            Tcp tap = new Tcp();
-            System.out.println(x.toString());
-        }
-
-
-
-
-    }
-
-    public void test2(File file){
+    public void ports(File file){
         InfoTCP port = new InfoTCP();
 
         port.load(file);

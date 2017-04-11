@@ -3,8 +3,6 @@ package app;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Tcp;
-import org.omg.CORBA.INTERNAL;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.*;
 

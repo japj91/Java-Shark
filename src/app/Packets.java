@@ -2,8 +2,6 @@ package app;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.*;
-import org.jnetpcap.protocol.network.Ip4;
-
 import java.io.File;
 import java.util.ArrayList;
 // made it so when you initailize class you need to send a file

@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="547.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.urlController">
+<AnchorPane maxHeight="476.0" maxWidth="570.0" prefHeight="476.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.urlController">
     <children>
-        <TabPane layoutY="7.0" prefHeight="450.0" prefWidth="547.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutY="7.0" prefHeight="476.0" prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
                 <Tab text="nonFiltered">
                     <content>
@@ -35,17 +35,17 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label text="Network Traffic Analysis" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                <Label text="Network Traffic Analysis" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="17.0" prefWidth="195.0" text="WebSite URl - non Filtered" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="TOP">
+                                <Label prefHeight="17.0" prefWidth="195.0" text="WebSite URl - non Filtered" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                     <GridPane.margin>
-                                        <Insets left="100.0" top="10.0" />
+                                        <Insets />
                                     </GridPane.margin>
                                 </Label>
-                        <ListView fx:id="noFilterURL" prefHeight="103.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                        <ListView fx:id="noFilterURL" maxHeight="300.0" maxWidth="530.0" prefHeight="292.0" prefWidth="530.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="3" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                     </content>
@@ -70,10 +70,13 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label text="Network Traffic Analysis" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.valignment="TOP">
+                                <Label text="Network Traffic Analysis" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
+                           <GridPane.margin>
+                              <Insets top="5.0" />
+                           </GridPane.margin>
                                 </Label>
                                 <Label prefHeight="17.0" prefWidth="299.0" text="WebSite Urls Filtered" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                     <GridPane.margin>

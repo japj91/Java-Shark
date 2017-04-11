@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="547.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.networkAnalysisController">
+<AnchorPane prefHeight="476.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.networkAnalysisController">
    <children>
-      <TabPane layoutY="7.0" prefHeight="450.0" prefWidth="547.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="7.0" prefHeight="476.0" prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Bytes by IP">
                <content>
-                  <GridPane prefHeight="211.0" prefWidth="262.0">
+                  <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,9 +40,9 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="136.0" text="Most Bytes sent to:" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label prefHeight="17.0" prefWidth="136.0" text="Most Bytes sent to:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
-                              <Insets left="100.0" top="10.0" />
+                              <Insets />
                            </GridPane.margin>
                         </Label>
                         <BarChart fx:id="byteChart" prefHeight="199.0" prefWidth="504.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="3">
@@ -53,7 +53,7 @@
                             <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <Label fx:id="byteCount" layoutX="110.0" layoutY="79.0" text="?" translateY="-17.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="byteCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="98.0" text="?" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>

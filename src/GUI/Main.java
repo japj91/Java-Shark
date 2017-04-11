@@ -14,8 +14,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../FXML/MainWindow.fxml"));
-        primaryStage.setTitle("Choose PCAP file");
-        primaryStage.setScene(new Scene(root, 838, 601));
+        primaryStage.setTitle("Break Down of Information");
+        primaryStage.setScene(new Scene(root, 767, 474));
         primaryStage.show();
 
     }

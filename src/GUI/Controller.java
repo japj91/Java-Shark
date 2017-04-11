@@ -56,8 +56,6 @@ public class Controller {
     @FXML
     private ListView sourceHost;
 
-    @FXML
-    private String sourceIP;
 
     public void MainWindowLoader(){
         // when open file is chossen comes here
@@ -74,12 +72,9 @@ public class Controller {
             ipLoad(file);
             genInfo(file);
             TCP(file);
-<<<<<<< HEAD
             setNonEditable();
-=======
-            UDP(file);
             test2(file);
->>>>>>> origin/master
+
         }
     }
 
@@ -205,7 +200,6 @@ public class Controller {
         ipAddresses.load(file);
         Set<String> set = ipAddresses.getIPAdderres();
 
-        sourceIP = String.valueOf(set);
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
 

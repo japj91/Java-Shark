@@ -6,10 +6,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 import org.omg.CORBA.INTERNAL;
 import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by jap on 4/5/2017.
@@ -75,17 +72,23 @@ public class InfoTCP extends Packets {
         return temp;
     }
 
-    public HashMap<Integer, Integer> getPorts() {
-        HashMap<Integer, Integer> ports = new HashMap<>();
-
+    public ArrayList<String> getPorts() {
+        HashMap<Integer, Integer> portsHash = new HashMap<>();
+        ArrayList<String> ports = new ArrayList<>();
         for (JPacket packet : jPackets) {
             if (packet.hasHeader(tcp)) {
-                if (ports.containsKey(tcp.destination())) {
-                    ports.put(tcp.destination(), ports.get(tcp.destination()) + 1);
+                if (portsHash.containsKey(tcp.destination())) {
+                    portsHash.put(tcp.destination(), portsHash.get(tcp.destination()) + 1);
                 } else {
-                    ports.put(tcp.destination(), 1);
+                    portsHash.put(tcp.destination(), 1);
                 }
             }
+        }
+        for(Map.Entry<Integer, Integer> entry: portsHash.entrySet()){
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+            String item = key.toString() +": "+ value.toString();
+            ports.add(item);
         }
         return ports;
     }

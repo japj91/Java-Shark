@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +21,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 public class Controller {
@@ -50,6 +52,9 @@ public class Controller {
 
     @FXML
     private ListView sourceHost;
+
+    @FXML
+    private ListView portView;
 
 
     public void MainWindowLoader(){
@@ -187,8 +192,10 @@ public class Controller {
         InfoTCP port = new InfoTCP();
 
         port.load(file);
+        ArrayList<String> ports = port.getPorts();
 
-        System.out.println(port.getPorts().toString());
+        ObservableList<String> items = FXCollections.observableArrayList(ports);
+        portView.setItems(items);
     }
 
     public void ipLoad(File file){

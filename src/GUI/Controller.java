@@ -22,6 +22,7 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 
 import javax.sound.sampled.Line;
 import javax.xml.soap.Text;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -187,6 +188,7 @@ public class Controller {
 
 
     }
+
     public void test2(File file){
         InfoTCP port = new InfoTCP();
 
@@ -194,6 +196,7 @@ public class Controller {
 
         System.out.println(port.getPorts().toString());
     }
+
     public void ipLoad(File file){
 
         ipAddresses ipAddresses = new ipAddresses();
@@ -236,6 +239,10 @@ public class Controller {
         alert.setContentText("Source Host is defined as:\n\n- A user who is making SYN requests\n- Their ACK flag is NOT SET");
 
         alert.showAndWait();
+    }
+
+    public void exitProgram(){
+        System.exit(0);
     }
 
     private void setNonEditable(){

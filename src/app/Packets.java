@@ -2,14 +2,15 @@ package app;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.*;
+import org.jnetpcap.protocol.network.Ip4;
 
 import java.io.File;
 import java.util.ArrayList;
 // made it so when you initailize class you need to send a file
-// created a getter for a array list that contians all listOfURls
-
+// creating a array list of packets
 
 public class Packets {
+
     private ArrayList<JPacket> packets;
 
     public Packets(){
@@ -17,7 +18,7 @@ public class Packets {
     }
 
     public void load(File file){
-        // loading of all packets into a array list
+
         final StringBuilder errbuf = new StringBuilder();
         Pcap pcap = Pcap.openOffline(file.getAbsolutePath(),errbuf);
 

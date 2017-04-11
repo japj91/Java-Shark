@@ -40,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
                   <ListView fx:id="sourceHost" layoutX="315.0" layoutY="185.0" maxHeight="27.0" maxWidth="100.0" prefHeight="27.0" prefWidth="100.0" />
-                  <Label layoutX="93.0" layoutY="280.0" prefHeight="14.0" prefWidth="33.0" stylesheets="@style.css" text="Types" />
+                  <Label layoutX="93.0" layoutY="280.0" prefHeight="15.0" prefWidth="100.0" stylesheets="@style.css" text="Headers seen" />
                   <Label layoutX="230.0" layoutY="84.0" stylesheets="@style.css" text="Shortest" />
                   <TextField fx:id="packetTotal" alignment="CENTER" layoutX="109.0" layoutY="80.0" maxHeight="27.0" maxWidth="100.0" prefHeight="27.0" prefWidth="100.0" />
                   <Label layoutX="20.0" layoutY="84.0" stylesheets="@style.css" text="Packets" />
@@ -49,7 +49,7 @@
                       <Menu mnemonicParsing="false" text="File">
                         <items>
                               <MenuItem mnemonicParsing="false" onAction="#MainWindowLoader" text="Open" />
-                          <MenuItem mnemonicParsing="false" text="Close" />
+                          <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Close" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="Network Analysis">

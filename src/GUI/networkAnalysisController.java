@@ -72,12 +72,10 @@ public class networkAnalysisController implements Initializable {
     }
 
     private void setChart(HashMap<String,Integer> map, Label label, BarChart chart){
-        // putting the graph togethere
+        // putting the graph together
         // have to get the source host
         // create a map that has the num of listOfURls as the key b/c u only want to show top 5
         map.remove(ShareableData.getInstance().getHostUserList().get(0));// removing the host user from graph the admin doesnt need to see how often they are the source
-
-
 
         TreeMap<Integer,String> orderedMap = createOrderedSet(map);  // creating a ordered map
         XYChart.Series series = new XYChart.Series<>();

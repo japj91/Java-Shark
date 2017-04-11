@@ -20,6 +20,7 @@ public class InfoTCP extends Packets {
     ArrayList<JPacket> jPackets;
     Tcp tcp = new Tcp();
 
+
     public InfoTCP() {
         jPackets = new ArrayList<>();
         jPackets = getPackets();

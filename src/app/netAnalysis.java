@@ -38,8 +38,6 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
-
-        System.out.println(packetMap);
         return packetMap;
     }
 
@@ -66,8 +64,6 @@ public class netAnalysis  extends Packets{
                 }
             }
         }
-
-        System.out.println(packetMap);
         return packetMap;
     }
 }

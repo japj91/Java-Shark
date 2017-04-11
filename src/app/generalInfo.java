@@ -100,7 +100,7 @@ public class generalInfo  extends Packets{
         map.add(String.format("IPv6 packets %s",ipv6));
         return map;
     }
-    
+
     private int checkipv4Header(JPacket packet){
         if (packet.hasHeader(ip4)){
             return 1;

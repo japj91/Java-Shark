@@ -7,9 +7,10 @@ import org.jnetpcap.protocol.tcpip.Tcp;
 import java.util.*;
 
 /**
- * Created by jap on 4/5/2017.
- * General TCP class
- * info on TCP listOfURls
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * Main class for all TCP related information.
+ * Provides information on Source host by detecting a SYN flag on the packet as well as display packet flow
+ * through all ports that are used
  */
 public class InfoTCP extends Packets {
     ArrayList<JPacket> jPackets;

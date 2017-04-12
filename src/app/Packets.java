@@ -5,8 +5,11 @@ import org.jnetpcap.packet.*;
 
 import java.io.File;
 import java.util.ArrayList;
-// made it so when you initailize class you need to send a file
-// creating a array list of packets
+
+/**
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * Super class required to load a file across all subclasses by creating an array list of packets.
+ */
 
 public class Packets {
 

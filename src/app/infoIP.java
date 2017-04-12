@@ -6,6 +6,12 @@ import java.util.*;
 import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.protocol.network.Ip4;
 
+/**
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * This class retreives IPAddresses from the capture file.
+ *
+ */
+
 public class infoIP extends Packets {
     Ip4 ip4 = new Ip4();
     ArrayList<JPacket> packets;
@@ -15,9 +21,9 @@ public class infoIP extends Packets {
         packets = getPackets();
     }
 
-    public Set<String> getIPAdderres() {
+    public Set<String> getIPAddresses() {
         // method gets a set of all listOfURls from parent class manipulates them to get data
-        HashSet<String> IPadderes = new HashSet<>();
+        HashSet<String> IPaddresses = new HashSet<>();
 
         for (JPacket pack : packets) {
 
@@ -25,12 +31,12 @@ public class infoIP extends Packets {
                 byte[] myListSource;
                 myListSource = ip4.source();
                 String IPString = org.jnetpcap.packet.format.FormatUtils.ip(myListSource);
-                IPadderes.add(IPString);
+                IPaddresses.add(IPString);
 
             }
 
         }
-        return IPadderes;
+        return IPaddresses;
     }
 
 

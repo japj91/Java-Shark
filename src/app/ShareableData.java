@@ -3,6 +3,9 @@ package app;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ */
 
 public class ShareableData {
 

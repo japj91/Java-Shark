@@ -11,10 +11,10 @@ import org.jnetpcap.protocol.tcpip.Udp;
 import java.util.ArrayList;
 
 /**
- * Created by jap on 4/5/2017.
- * General information class
- * Shortest longest time
- * wanted to put in packet calss but b/c its super class did not put in there
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * This class provides general information such as Shortest packet length, Longest packet length, number of packets
+ * and length of time of capture.
+ *
  */
 public class generalStats extends Packets {
     ArrayList<JPacket> jPackets;

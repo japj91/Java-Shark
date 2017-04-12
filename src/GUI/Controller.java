@@ -20,6 +20,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * The controller class acquires the latest information from the app package and uses it to insert information into
+ * the GUI through the FXML package.
+ *
+ */
+
 public class Controller {
 
     @FXML
@@ -144,7 +151,7 @@ public class Controller {
 
         infoIP infoIP = new infoIP();
         infoIP.load(file);
-        Set<String> set = infoIP.getIPAdderres();
+        Set<String> set = infoIP.getIPAddresses();
 
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);

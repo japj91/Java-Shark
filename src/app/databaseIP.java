@@ -14,7 +14,12 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.*;
 
-
+/**
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * This class provides a geolocation for IPs.
+ * The IPs are cross referenced with the GeoLite2-Country.mmdb database.
+ *
+ */
 public class databaseIP extends Packets {
     ArrayList<JPacket> jPackets = new ArrayList<>();
     Ip4 ip4 = new Ip4();

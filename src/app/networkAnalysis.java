@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by jap on 4/5/2017.
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * This class helps with acquiring information on IP traffic and plot it on a Bar Chart for easy readability.
+ * The two provided filters are packet per IP and Bytes per IP.
+ *
  */
 public class networkAnalysis extends Packets {
 

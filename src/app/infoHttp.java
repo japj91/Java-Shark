@@ -8,8 +8,9 @@ import java.util.HashSet;
 
 
 /**
- * Created by jap on 4/8/2017.
- * Grab URLs that were visited by user
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * This class grabs URLs from the capture file inserted into the program.
+ *
  */
 public class infoHttp extends Packets {
     Http http = new Http();

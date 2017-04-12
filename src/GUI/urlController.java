@@ -14,9 +14,9 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * Created by jap on 4/8/2017.
- * loading of the websites visited
- * might need to get rid of second filtered tab
+ *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
+ * Controller for URL.FXML
+ *
  */
 public class urlController implements Initializable {
 

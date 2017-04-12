@@ -13,7 +13,9 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * Created by jap on 4/7/2017.
+ *Created by Jap Johal A0099 and Mohammed Bajaman A00991074
+ * Due: 12th April 2017
+ * Controller for diplaying information into the NetworkAnalysis FXML
  */
 public class networkAnalysisController implements Initializable {
 

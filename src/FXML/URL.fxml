@@ -15,7 +15,7 @@
     <children>
         <TabPane layoutY="7.0" prefHeight="476.0" prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <Tab text="nonFiltered">
+                <Tab text="URLs Captured">
                     <content>
                         <GridPane prefHeight="211.0" prefWidth="262.0">
                             <columnConstraints>
@@ -50,7 +50,7 @@
                         </GridPane>
                     </content>
                 </Tab>
-                <Tab text="Filtered">
+                <Tab text="Headers Seen">
                     <content>
                         <GridPane prefHeight="438.0" prefWidth="538.0">
                             <columnConstraints>
@@ -78,12 +78,12 @@
                               <Insets top="5.0" />
                            </GridPane.margin>
                                 </Label>
-                                <Label prefHeight="17.0" prefWidth="299.0" text="WebSite Urls Filtered" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                                    <GridPane.margin>
-                                        <Insets left="100.0" top="10.0" />
-                                    </GridPane.margin>
-                                </Label>
-                        <ListView fx:id="filterURL" prefHeight="103.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                        <ListView fx:id="HeaderSeen" maxHeight="300.0" maxWidth="530.0" prefHeight="292.0" prefWidth="530.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                        <Label layoutX="200.0" layoutY="15.0" text="Different Headers Seen in Packets" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
                             </children>
                         </GridPane>
                     </content>

@@ -15,42 +15,23 @@ public class infoHttp extends Packets{
     Http http = new Http();
     public infoHttp(){}
 
-    public HashSet<String> listOfURls(int x){
+    public HashSet<String> listOfURls() {
         // looking for all urls that were visited.
         ArrayList<JPacket> packets = getPackets();
 
         HashSet<String> set = new HashSet<>();
 
-        //HashSet<String> string = new HashSet<>();
+        for (JPacket packet : packets) {
+            if (packet.hasHeader(http)) {
 
-        for (JPacket packet:packets){
-            if (packet.hasHeader(http)){
-
-                String temp =http.fieldValue((Http.Request.Referer));
+                String temp = http.fieldValue((Http.Request.Referer));
                 String urlVisited = String.valueOf(temp);
 
-                if (!urlVisited.equals("null")){ // getting rid of null values
+                if (!urlVisited.equals("null")) { // getting rid of null values
                     set.add(urlVisited);
                 }
             }
-
-        }
-
-        if (x==0) { // returns a filtered set
-            return filteredSet(set);
         }
         return set;
-    }
-
-    private HashSet<String> filteredSet(HashSet<String> set){
-        // filters for only websites
-        // websites are defined as links that have "/" at the end.
-        HashSet<String> hashSet = new HashSet<>();
-        for (String temp : set) {
-            if (temp.endsWith("/")) {
-                hashSet.add(temp);
-            }
-        }
-        return hashSet;
     }
 }

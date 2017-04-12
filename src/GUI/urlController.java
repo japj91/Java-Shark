@@ -1,6 +1,7 @@
 package GUI;
 
 import app.ShareableData;
+import app.generalStats;
 import app.infoHttp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,26 +24,34 @@ public class urlController implements Initializable {
     private ListView noFilterURL;
 
     @FXML
-    private ListView filterURL;
-
+    private ListView HeaderSeen;
+    File file;
 
     public void initialize(URL location, ResourceBundle resources) {
-        ListLoader(noFilterURL,1);
-        ListLoader(filterURL,0);
-
-
+        ListLoader(noFilterURL);
+        HeadersLoader();
     }
 
-    private void ListLoader(ListView list, int x){
+    private void ListLoader(ListView list){
         ArrayList<File> fileList = ShareableData.getInstance().getFile(); // get the files
-        File file = fileList.get(0);
+        file = fileList.get(0);
 
         infoHttp http = new infoHttp();
         http.load(file);
 
-        Set<String> set = http.listOfURls(x);
+        Set<String> set = http.listOfURls();
         ObservableList<String> items = FXCollections.observableArrayList(set);
         list.setItems(items);
+
+    }
+
+    public void HeadersLoader(){
+        generalStats stats = new generalStats();
+        stats.load(file);
+        ArrayList<String> list = stats.packetTypes();
+
+        ObservableList<String> items = FXCollections.observableArrayList(list);
+        HeaderSeen.setItems(items);
 
     }
 }

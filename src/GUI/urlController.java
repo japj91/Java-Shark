@@ -35,7 +35,7 @@ public class urlController implements Initializable {
 
     private void ListLoader(ListView list, int x){
         ArrayList<File> fileList = ShareableData.getInstance().getFile(); // get the files
-        File file =fileList.get(0);
+        File file = fileList.get(0);
 
         infoHttp http = new infoHttp();
         http.load(file);

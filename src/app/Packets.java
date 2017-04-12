@@ -23,7 +23,6 @@ public class Packets {
         pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
 
             public void nextPacket(JPacket packet, StringBuilder stringBuilder) {
-
                 packets.add(packet);
             }
             }, errbuf);

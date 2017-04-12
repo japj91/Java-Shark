@@ -1,5 +1,6 @@
 package GUI;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +18,11 @@ import app.*;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Controller {
 
@@ -53,7 +57,7 @@ public class Controller {
     private ListView portView;
 
 
-    public void MainWindowLoader(){
+    public void MainWindowLoader() throws IOException, GeoIp2Exception {
         // when open file is chossen comes here
         // users selects file and then the popup is filled up
         // error shows up but to show bassically make the open button launch openFilechooser then on second GUI make file button
@@ -70,10 +74,19 @@ public class Controller {
             TCP(file);
             setNonEditable();
             ports(file);
+            temp(file);
 
         }
     }
 
+    private void temp(File file) throws IOException, GeoIp2Exception {
+        test test = new test();
+        test.load(file);
+        ArrayList<String> map = test.print();
+        ObservableList<String> items = FXCollections.observableArrayList(map);
+        typesList.setItems(items);
+
+    }
     private void TCP(File file) {
         InfoTCP tcp = new InfoTCP();
         tcp.load(file);
@@ -100,7 +113,7 @@ public class Controller {
             stage.show();
 
         }catch (Exception e){
-            System.out.println(e.getCause());
+            e.printStackTrace();
         }
     }
 
@@ -117,7 +130,7 @@ public class Controller {
             stage.show();
 
         }catch (Exception e){
-            System.out.println(e.getMessage());
+           e.printStackTrace();
         }
     }
 

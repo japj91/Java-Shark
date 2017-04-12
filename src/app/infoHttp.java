@@ -27,15 +27,6 @@ public class infoHttp extends Packets{
             if (packet.hasHeader(http)){
 
                 String temp =http.fieldValue((Http.Request.Referer));
-                String temp2 = http.fieldValue(Http.Request.Host);
-
-                String w = String.valueOf(temp2);
-               // System.out.println(w);
-
-//                string.add(w);
-                // can implement this will print names differently go to line 51 - 53 for print statment
-
-
                 String urlVisited = String.valueOf(temp);
 
                 if (!urlVisited.equals("null")){ // getting rid of null values
@@ -44,9 +35,7 @@ public class infoHttp extends Packets{
             }
 
         }
-//        for (String xx:string){
-//            System.out.println(xx);
-//        }
+
         if (x==0) { // returns a filtered set
             return filteredSet(set);
         }

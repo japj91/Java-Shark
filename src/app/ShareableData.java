@@ -18,13 +18,11 @@ public class ShareableData {
             return hostUserList;
         }
 
-
         private ArrayList<File> fileList = new ArrayList<>();
 
         public ArrayList<File> getFile(){
             return fileList;
         }
-
     }
 
 

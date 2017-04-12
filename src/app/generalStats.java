@@ -24,6 +24,7 @@ public class generalStats extends Packets{
     Ip6 ip6 = new Ip6();
 
 
+
     public generalStats(){
         jPackets = new ArrayList<>();
         this.jPackets = getPackets();

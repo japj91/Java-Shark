@@ -12,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,7 +55,7 @@ public class Controller {
 
 
     public void MainWindowLoader() throws IOException, GeoIp2Exception {
-        // when open file is chossen comes here
+        // when open file is chosen comes here
         // users selects file and then the popup is filled up
         // program does nothing if no file is selected
 

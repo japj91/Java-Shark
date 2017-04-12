@@ -40,7 +40,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="136.0" text="Most Bytes sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label prefHeight="17.0" prefWidth="136.0" stylesheets="@style.css" text="Most Bytes sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -53,7 +53,7 @@
                             <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <Label fx:id="byteCount" prefHeight="17.0" prefWidth="98.0" text="?" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label fx:id="byteCount" prefHeight="17.0" prefWidth="98.0" text="?" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>
@@ -86,7 +86,7 @@
                               <Insets top="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="118.0" text="Most Packets sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label prefHeight="17.0" prefWidth="118.0" stylesheets="@style.css" text="Most Packets sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="25.0" />
                            </GridPane.margin>
@@ -99,7 +99,7 @@
                               <NumberAxis fx:id="y1" side="LEFT" />
                            </yAxis>
                         </BarChart>
-                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="105.0" text="?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="105.0" text="?" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>

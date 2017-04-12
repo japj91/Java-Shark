@@ -66,8 +66,6 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints />
-                        <ColumnConstraints />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -88,7 +86,7 @@
                         </Label>
                         <Label prefHeight="17.0" prefWidth="118.0" text="Most Packets sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
-                              <Insets right="25.0" />
+                              <Insets />
                            </GridPane.margin>
                         </Label>
                         <BarChart fx:id="packetChart" prefHeight="326.0" prefWidth="570.0" GridPane.columnSpan="6" GridPane.rowIndex="2" GridPane.rowSpan="3">
@@ -99,7 +97,7 @@
                               <NumberAxis fx:id="y1" side="LEFT" />
                            </yAxis>
                         </BarChart>
-                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="105.0" text="?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="70.0" text="?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
                </content>

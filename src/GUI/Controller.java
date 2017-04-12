@@ -166,7 +166,7 @@ public class Controller {
         longest.setText(stats.largestPacket());
         shortest.setText(stats.shortestPacket());
         time.setText(stats.timeForCapture() + " secs");
-        mbTotal.setText(stats.networkTraffic());
+        mbTotal.setText(stats.MBinFile());
     }
 
     public void alertMessage() {

@@ -65,7 +65,7 @@ public class generalStats extends Packets {
 
     }
 
-    public String networkTraffic() {
+    public String MBinFile() {
         // method tells u how many bytes are in the file
         int x = 0;
         for (JPacket Packet : jPackets) {

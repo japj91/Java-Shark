@@ -2,6 +2,7 @@ package app;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.*;
+
 import java.io.File;
 import java.util.ArrayList;
 // made it so when you initailize class you need to send a file
@@ -11,24 +12,19 @@ public class Packets {
 
     private ArrayList<JPacket> packets;
 
-    public Packets(){
+    public Packets() {
         packets = new ArrayList<>();
     }
 
-    public void load(File file){
+    public void load(File file) {
 
         final StringBuilder errbuf = new StringBuilder();
-        Pcap pcap = Pcap.openOffline(file.getAbsolutePath(),errbuf);
+        Pcap pcap = Pcap.openOffline(file.getAbsolutePath(), errbuf);
 
-        pcap.loop(Pcap.LOOP_INFINITE, new JPacketHandler<StringBuilder>() {
-
-            public void nextPacket(JPacket packet, StringBuilder stringBuilder) {
-                packets.add(packet);
-            }
-            }, errbuf);
+        pcap.loop(Pcap.LOOP_INFINITE, (JPacketHandler<StringBuilder>) (packet, stringBuilder) -> packets.add(packet), errbuf);
     }
 
-    public ArrayList<JPacket> getPackets(){
+    public ArrayList<JPacket> getPackets() {
         return packets;
     }
 

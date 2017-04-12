@@ -32,7 +32,7 @@ public class urlController implements Initializable {
         HeadersLoader();
     }
 
-    private void ListLoader(ListView list){
+    private void ListLoader(ListView list) {
         ArrayList<File> fileList = ShareableData.getInstance().getFile(); // get the files
         file = fileList.get(0);
 
@@ -45,7 +45,7 @@ public class urlController implements Initializable {
 
     }
 
-    public void HeadersLoader(){
+    public void HeadersLoader() {
         generalStats stats = new generalStats();
         stats.load(file);
         ArrayList<String> list = stats.packetTypes();

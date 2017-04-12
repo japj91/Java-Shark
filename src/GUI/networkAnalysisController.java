@@ -20,30 +20,16 @@ public class networkAnalysisController implements Initializable {
 
 
     @FXML
-    private Parent root;
-
-    @FXML
     BarChart<String,Integer> byteChart;
 
     @FXML
     BarChart<String,Integer> packetChart;
 
     @FXML
-    CategoryAxis x;
-
-    @FXML
-    NumberAxis y;
-
-    @FXML
     Label packetCount;
 
     @FXML
     Label byteCount;
-
-
-    public void closer(){
-        System.out.println("Close not yet implemented");
-    }
 
 
     @Override

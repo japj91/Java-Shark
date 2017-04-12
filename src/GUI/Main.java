@@ -14,12 +14,11 @@ import javafx.stage.Stage;
 // make anohter small file with controller least used functions
 
 
-
 public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../FXML/MainWindow.fxml"));
         primaryStage.setTitle("Break Down of Information");
         primaryStage.setScene(new Scene(root, 767, 474));

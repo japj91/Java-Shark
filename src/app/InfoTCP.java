@@ -85,7 +85,7 @@ public class InfoTCP extends Packets {
         for(Map.Entry<Integer, Integer> entry: portsHash.entrySet()){
             Integer key = entry.getKey();
             Integer value = entry.getValue();
-            String item = key.toString() +": "+ value.toString();
+            String item = "\t"+key.toString() +"\t:\t"+ value.toString();
             ports.add(item);
         }
         return ports;

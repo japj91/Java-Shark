@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="476.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.networkAnalysisController">
+<AnchorPane prefHeight="476.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.networkAnalysisController">
    <children>
       <TabPane layoutY="7.0" prefHeight="476.0" prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -35,12 +27,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Network Traffic Analysis" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="17.0" prefWidth="136.0" text="Most Bytes sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label text="Network Traffic Analysis" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+                        <Label prefHeight="17.0" prefWidth="136.0" stylesheets="@style.css" text="Most Bytes sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -53,7 +41,7 @@
                             <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <Label fx:id="byteCount" prefHeight="17.0" prefWidth="98.0" text="?" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label fx:id="byteCount" prefHeight="17.0" prefWidth="98.0" stylesheets="@style.css" text="?" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
                </content>
@@ -79,14 +67,14 @@
                      </rowConstraints>
                      <children>
                         <Label text="Network Traffic Analysis" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
                            <GridPane.margin>
                               <Insets top="5.0" />
                            </GridPane.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="118.0" text="Most Packets sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label prefHeight="17.0" prefWidth="118.0" stylesheets="@style.css" text="Most Packets sent to:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="25.0" />
                            </GridPane.margin>
@@ -99,7 +87,7 @@
                               <NumberAxis fx:id="y1" side="LEFT" />
                            </yAxis>
                         </BarChart>
-                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="105.0" text="?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Label fx:id="packetCount" layoutX="110.0" layoutY="79.0" prefHeight="17.0" prefWidth="105.0" stylesheets="@style.css" text="?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
                </content>

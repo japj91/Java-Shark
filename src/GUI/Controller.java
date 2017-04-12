@@ -1,5 +1,6 @@
 package GUI;
 
+import app.*;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,22 +8,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import app.*;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class Controller {
 
@@ -51,7 +49,7 @@ public class Controller {
     private TextField longest;
 
     @FXML
-    private ListView sourceHost;
+    private TextField sourceHost;
 
     @FXML
     private ListView portView;
@@ -60,49 +58,53 @@ public class Controller {
     public void MainWindowLoader() throws IOException, GeoIp2Exception {
         // when open file is chossen comes here
         // users selects file and then the popup is filled up
-        // error shows up but to show bassically make the open button launch openFilechooser then on second GUI make file button
-        // launch MainWindowLoader
+        // program does nothing if no file is selected
 
         File file = load();
 
-        if (file !=null) {
+        if (file != null) {
+
             ArrayList<File> tempFile = ShareableData.getInstance().getFile();
             tempFile.add(file);
-
             ipLoad(file);
+
             genInfo(file);
             TCP(file);
-            setNonEditable();
-            ports(file);
-            temp(file);
 
+            setNonEditable();
+            IpLookUP(file);
         }
     }
 
-    private void temp(File file) throws IOException, GeoIp2Exception {
-        test test = new test();
-        test.load(file);
-        ArrayList<String> map = test.print();
-        ObservableList<String> items = FXCollections.observableArrayList(map);
-        typesList.setItems(items);
+    private void IpLookUP(File file) throws IOException, GeoIp2Exception {
+        databaseIP databaseIP = new databaseIP();
+        databaseIP.load(file);
 
+        ArrayList<String> map = databaseIP.getLocationByIP();
+        ObservableList<String> items = FXCollections.observableArrayList(map);
+
+        typesList.setItems(items);
     }
+
     private void TCP(File file) {
         InfoTCP tcp = new InfoTCP();
         tcp.load(file);
 
         String IpSource = tcp.getOriginHost();
-
         ArrayList<String> user = ShareableData.getInstance().getHostUserList();
-        user.add(IpSource.trim());
 
-        ObservableList<String> items = FXCollections.observableArrayList(IpSource);
-        sourceHost.setItems(items);
+        user.add(IpSource.trim());
+        ArrayList<String> ports = tcp.getPorts();
+
+        ObservableList<String> list = FXCollections.observableArrayList(ports);
+
+        sourceHost.setText(IpSource);
+        portView.setItems(list);
     }
 
-    public void openNetworkAnalysis(){
+    public void openNetworkAnalysis() {
 
-        try{
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/NetworkAnalysis.fxml"));
             Parent root1 = fxmlLoader.load();
 
@@ -112,14 +114,14 @@ public class Controller {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void openURL(){
+    public void openURL() {
 
-        try{
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXML/URL.fxml"));
             Parent root1 = fxmlLoader.load();
 
@@ -129,33 +131,21 @@ public class Controller {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
-        }catch (Exception e){
-           e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public File load(){
+    public File load() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
-        if (file==null){
+        if (file == null) {
             return null;
         }
-
-
         return file;
     }
 
-    public void ports(File file){
-        InfoTCP port = new InfoTCP();
-
-        port.load(file);
-        ArrayList<String> ports = port.getPorts();
-
-        ObservableList<String> items = FXCollections.observableArrayList(ports);
-        portView.setItems(items);
-    }
-
-    public void ipLoad(File file){
+    public void ipLoad(File file) {
 
         infoIP infoIP = new infoIP();
         infoIP.load(file);
@@ -166,31 +156,18 @@ public class Controller {
 
     }
 
-    public void genInfo(File file ){
-        generalStats gen = new generalStats();
-        gen.load(file);
+    public void genInfo(File file) {
+        generalStats stats = new generalStats();
+        stats.load(file);
 
-        packetTotal.setText(gen.numPackets());
-        longest.setText(gen.largestPacket());
-        shortest.setText(gen.shortestPacket());
-        time.setText(gen.timeForCapture()+" secs");
-        mbTotal.setText(gen.networkTraffic());
-
-        ObservableList<String> items = FXCollections.observableArrayList(gen.packetTypes());
-        typesList.setItems(items);
-
-
+        packetTotal.setText(stats.numPackets());
+        longest.setText(stats.largestPacket());
+        shortest.setText(stats.shortestPacket());
+        time.setText(stats.timeForCapture() + " secs");
+        mbTotal.setText(stats.networkTraffic());
     }
 
-    public void setColor(){
-        sourceHostLabel.setTextFill(Color.web("#0076a3"));
-    }
-
-    public void normalColor(){
-        sourceHostLabel.setTextFill(Color.web("#000"));
-    }
-
-    public void alertMessage(){
+    public void alertMessage() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
@@ -199,11 +176,11 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void exitProgram(){
+    public void exitProgram() {
         System.exit(0);
     }
 
-    private void setNonEditable(){
+    private void setNonEditable() {
         packetTotal.setEditable(false);
         longest.setEditable(false);
         shortest.setEditable(false);

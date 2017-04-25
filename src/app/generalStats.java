@@ -14,7 +14,6 @@ import java.util.ArrayList;
  *Created by Jap Johal A00980851 and Mohammed Bajaman A00991074
  * This class provides general information such as Shortest packet length, Longest packet length, number of packets
  * and length of time of capture.
- *
  */
 public class generalStats extends Packets {
     ArrayList<JPacket> jPackets;

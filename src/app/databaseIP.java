@@ -32,7 +32,7 @@ public class databaseIP extends Packets {
     public ArrayList<String> getLocationByIP() throws IOException, GeoIp2Exception {
         TreeMap<String, String> map = new TreeMap<>(); // map to store country name and ip related to that country
 
-        File file = new File("JavaGUI/src/GeoLite2-Country.mmdb"); // connecting to database note database needes to be unzipped and inside the source folder
+        File file = new File("src/GeoLite2-Country.mmdb"); // connecting to database note database needes to be unzipped and inside the source folder
         String dbLocation  = file.getAbsolutePath();
         File database = new File(dbLocation);
 
